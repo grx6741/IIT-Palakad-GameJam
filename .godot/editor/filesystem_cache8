@@ -1,0 +1,8 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1705743649
+icon.svg::CompressedTexture2D::2892766226997683848::1705677317::1705743650::1::::<><>::
+Label.gd::GDScript::-1::1705742779::0::1::::<>Label<>::
+Line2D_generator.gd::GDScript::-1::1705742243::0::1::::<>Line2D<>::
+mouse_draw.gd::GDScript::-1::1705743013::0::1::::<>Node2D<>::
+node_2d.tscn::PackedScene::9214091238325222107::1705743493::0::1::::<><>::res://mouse_draw.gd<>uid://bhhjo4ktqngiy::::res://icon.svg<>res://Label.gd
+_draw.gd::GDScript::-1::1705729312::0::1::::<>Node2D<>::
