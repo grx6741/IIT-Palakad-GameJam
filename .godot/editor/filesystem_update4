@@ -1,4 +1,4 @@
 res://Scenes/SampleScene.tscn
-res://Scripts/Player.gd
-res://Scripts/create_colliders.gd
 res://Scenes/node_2d.tscn
+res://Scripts/mouse_draw.gd
+res://Scripts/create_colliders.gd
