@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4jm0bnm8mp8n"]
+
+[ext_resource type="Script" path="res://Scripts/mouse_draw.gd" id="1_vsm6m"]
+[ext_resource type="Shader" path="res://Shaders/Post_Processing.gdshader" id="3_ps0qp"]
+[ext_resource type="Script" path="res://Scripts/Label.gd" id="4_b85w3"]
+[ext_resource type="Texture2D" uid="uid://b41warj0cmk04" path="res://icon.svg" id="4_cuitd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_55l7g"]
+shader = ExtResource("3_ps0qp")
+shader_parameter/size = Vector2(32, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ov88"]
+size = Vector2(1096, 125)
+
+[node name="Draw Shapes" type="Node2D"]
+metadata/_edit_vertical_guides_ = [-117.0]
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("1_vsm6m")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_55l7g")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("4_b85w3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(492, 302)
+texture = ExtResource("4_cuitd")
