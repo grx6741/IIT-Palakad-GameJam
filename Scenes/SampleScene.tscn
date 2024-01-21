@@ -11,7 +11,6 @@ size = Vector2(117, 116)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_n0q5i")
-points_array = [Vector2(50, 200), Vector2(55, 250), Vector2(140, 300), Vector2(200, 350), Vector2(300, 559.84), Vector2(500, 0)]
 slope_collider_sensitivity = 0.135
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]

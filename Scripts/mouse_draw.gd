@@ -1,4 +1,4 @@
-extends Node2D
+extends "res://Scripts/create_colliders.gd"
 
 var _lines: Array = []
 
@@ -6,6 +6,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_SPACE:
 			constructRigidBodies()
+			_lines.clear()
 	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if not _lines.is_empty() and _lines[-1] != null:
 			_lines.append(null)
@@ -29,14 +30,19 @@ func constructRigidBodies() -> void:
 	var j: int = get_null(_lines, i)
 	var _rigidBodies: Array = []
 
-	while i < len(_lines) and j > 0:
-		var line2d = Line2D.new()
+	while j > 0:
+		var line2d: Line2D = Line2D.new()
 		while i < j:
 			line2d.add_point(_lines[i])
+			line2d.width = 3
 			i += 1
 		var rigidBody = RigidBody2D.new()
+		handleColliderCreation(rigidBody, line2d.points)
+		print(1, " ", len(line2d.points))
 		rigidBody.add_child(line2d)
-		# add_child(rigidBody)
+		rigidBody.mass = len(line2d.points)
+		# rigidBody.kine
+		add_child(rigidBody)
 		_rigidBodies.append(rigidBody)
 		i = j + 1
 		j = get_null(_lines, i)
@@ -49,7 +55,7 @@ func _draw() -> void:
 		if curr == null or prev == null:
 			i += 2
 			continue
-		draw_line(prev, curr, Color.BLACK, 20, true)
-		draw_circle(prev, 10, Color.BLACK)
-		draw_circle(curr, 10, Color.BLACK)
+		draw_line(prev, curr, Color.BLACK, 10, true)
+		draw_circle(prev, 5, Color.BLACK)
+		draw_circle(curr, 5, Color.BLACK)
 		i += 1

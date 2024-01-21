@@ -2,3 +2,5 @@ res://Scenes/SampleScene.tscn
 res://Scenes/node_2d.tscn
 res://Scripts/mouse_draw.gd
 res://Scripts/create_colliders.gd
+res://Scripts/Line2D_generator.gd
+res://Scenes/Camera2D.gd
