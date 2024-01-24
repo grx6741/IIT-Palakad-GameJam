@@ -31,14 +31,13 @@ func getLength_Line_Array(_array : Array,index : int) -> float:
 	return dirVec.length()
 
 func handleColliderCreation(rigidbody: RigidBody2D, points_array) -> void:
-	print(2, " ", len(points_array))
-	if(not in_draw_mode and not has_skeleton):
+	if(not in_draw_mode and not has_skeleton and len(points_array) > 1):
 		var slope: float = getDeltaSlope(points_array,0)
 		slope_last_frame = slope
 		var length: float = getLength_Line_Array(points_array,0)
 		var angle: float = 0.0
 		var last_detPos : Vector2 = points_array[0]
-		for i in range(1,len(points_array)-1):
+		for i in range(1,len(points_array)-2):
 			if(points_array[i] == null or points_array[i+1] == null):
 				continue
 			slope = getDeltaSlope(points_array,i)

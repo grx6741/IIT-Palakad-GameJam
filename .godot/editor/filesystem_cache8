@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1705829104
+::res://::1706027371
 icon.svg::CompressedTexture2D::2892766226997683848::1705828980::1705828980::1::::<><>::
 ::res://addons/::1705828980
 ::res://addons/godot-git-plugin/::1705828980
@@ -9,7 +9,7 @@ THIRDPARTY.md::TextFile::-1::1705828980::0::1::::<><>::
 ::res://addons/godot-git-plugin/linux/::1705828980
 ::res://addons/godot-git-plugin/macos/::1705828980
 ::res://addons/godot-git-plugin/win64/::1705828980
-::res://addons/godot_vim/::1705828980
+::res://addons/godot_vim/::1705829105
 command_line.gd::GDScript::-1::1705828980::0::1::::<>LineEdit<>::
 constants.gd::GDScript::-1::1705828980::0::1::::<>RefCounted<>::
 cursor.gd::GDScript::-1::1705828980::0::1::::<>Control<>::
@@ -22,11 +22,13 @@ status_bar.gd::GDScript::-1::1705828980::0::1::::<>HBoxContainer<>::
 find.gd::GDScript::-1::1705828980::0::1::::<>RefCounted<>::
 goto.gd::GDScript::-1::1705828980::0::1::::<>RefCounted<>::
 marks.gd::GDScript::-1::1705828980::0::1::::<>RefCounted<>::
-::res://Scenes/::1705828980
-node_2d.tscn::PackedScene::9214091238325222107::1705828980::0::1::::<><>::res://Scripts/mouse_draw.gd<>res://Scripts/Label.gd
-SampleScene.tscn::PackedScene::6160802502719804358::1705828980::0::1::::<><>::res://Scripts/create_colliders.gd<>uid://bhhjo4ktqngiy::::res://icon.svg
-::res://Scripts/::1705828980
-create_colliders.gd::GDScript::-1::1705828980::0::1::::<>Node2D<>::
+::res://Scenes/::1705853492
+node_2d.tscn::PackedScene::9214091238325222107::1706029857::0::1::::<><>::res://Scripts/mouse_draw.gd<>uid://bhhjo4ktqngiy::::res://icon.svg<>res://Scripts/Label.gd
+SampleScene.tscn::PackedScene::6160802502719804358::1705853492::0::1::::<><>::res://Scripts/create_colliders.gd<>uid://bhhjo4ktqngiy::::res://icon.svg
+::res://Scripts/::1705853758
+create_colliders.gd::GDScript::-1::1705852590::0::1::::<>Node2D<>::
 Label.gd::GDScript::-1::1705828980::0::1::::<>Label<>::
 Line2D_generator.gd::GDScript::-1::1705828980::0::1::::<>Line2D<>::
-mouse_draw.gd::GDScript::-1::1705828980::0::1::::<>Node2D<>::
+mouse_draw.gd::GDScript::-1::1705853753::0::1::::<>Node2D<>::
+::res://Scripts/Classes/::1705853763
+Stroke.gd::GDScript::-1::1706029180::0::1::::<>RefCounted<>::
