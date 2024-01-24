@@ -1,7 +1,0 @@
-res://Scripts/create_colliders.gd
-res://Scripts/Classes/Stroke.gd
-res://Scripts/mouse_draw.gd
-res://Scenes/node_2d.tscn
-res://Scenes/PlayerEditorScene.tscn
-res://Scenes/SampleScene.tscn
-res://Scenes/PlatformerScene.tscn
