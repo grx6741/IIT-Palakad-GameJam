@@ -31,6 +31,8 @@ func _ready() -> void:
 	_clearButtonNode.focus_mode = BaseButton.FOCUS_NONE
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
+		return
 	if event is InputEventKey and event.pressed and not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if event.keycode == KEY_SPACE:
 			constructRigidBodies()
