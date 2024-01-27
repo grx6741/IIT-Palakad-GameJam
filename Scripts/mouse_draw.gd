@@ -15,7 +15,8 @@ var _unFreezeButtonNode : Button
 
 var _mouse_axis_point_map : Dictionary = {}
 var _cell_size: int = 20
-
+var _joinable_rigidbodies:Array = []
+var joints = []
 # Helper Functions
 
 func get_null(array: Array, start: int = 0) -> int:
@@ -36,24 +37,45 @@ func get_2_closest_rb(pos: Vector2, rbs: Array) -> Array:
 
 	var _second_closest = -1
 	var _second_closest_distance = INF
-	print(_second_closest_distance)
+	# print(_second_closest_distance)
 	for i in range(len(rbs)):
-		var children = rbs[i].get_children()
-		for j in range(len(children)):
-			if children[j] is CollisionShape2D:
-				var p: Vector2 = children[j].get_global_position()
-				var dist: float = p.distance_squared_to(pos)
-				if dist < _second_closest_distance:
-					if dist < _closest_distance:
-						_second_closest = _closest
-						_second_closest_distance = _closest_distance
+		var p: Vector2 = rbs[i][0]
+		var dist: float = p.distance_squared_to(pos)
+		if dist < _closest_distance:
+			_closest = i
+			_closest_distance = dist
+	
 
-						_closest = i
-						_closest_distance = dist
-					elif i != _closest:
-						_second_closest = i
-						_second_closest_distance = dist
-	return [_closest, _second_closest]
+	for i in range(len(rbs)):
+		var p: Vector2 = rbs[i][0]
+		var dist: float = p.distance_squared_to(pos)
+		if dist < _second_closest_distance and rbs[i][1] != rbs[_closest][1]:
+			print(rbs[i][1]," : ",rbs[_closest][1])
+			_second_closest = i
+			_second_closest_distance = dist
+
+
+	# print(_closest," : ",_second_closest)
+	if(_closest == -1 or _second_closest == -1):
+		return []
+	return [rbs[_closest], rbs[_second_closest]]
+	# return [_closest, _second_closest]
+	# 	var children = rbs[i].get_children()
+	# 	for j in range(len(children)):
+	# 		if children[j] is CollisionShape2D:
+	# 			var p: Vector2 = children[j].get_global_position()
+	# 			var dist: float = p.distance_squared_to(pos)
+	# 			if dist < _second_closest_distance:
+	# 				if dist < _closest_distance:
+	# 					_second_closest = _closest
+	# 					_second_closest_distance = _closest_distance
+
+	# 					_closest = i
+	# 					_closest_distance = dist
+	# 				elif i != _closest:
+	# 					_second_closest = i
+	# 					_second_closest_distance = dist
+	# return [_closest, _second_closest]
 
 # Button Handles
 
@@ -81,9 +103,14 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		return
 	if event is InputEventKey and event.pressed and not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		if event.keycode == KEY_SPACE:
+		if event.keycode == KEY_SPACE and _optionNode.get_selected_id() != StrokeMode.JOINT_STROKE:
 			constructRigidBodies()
 			_lines.clear()
+		elif event.keycode == KEY_SPACE and _optionNode.get_selected_id() == StrokeMode.JOINT_STROKE:
+			print("I am Here")
+			if(len(_joinable_rigidbodies) >= 2):
+				create_Joints(_joinable_rigidbodies[0],_joinable_rigidbodies[1],10.0)
+
 	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if not _lines.is_empty() and _lines[-1] != null:
 			_lines.append(null)
@@ -95,6 +122,20 @@ func _input(event: InputEvent) -> void:
 			if _lines[-1] != event.position:
 				_lines.append(event.position)
 		# queue_redraw()
+
+func create_Joints(rb1,rb2,_angular_vel:float = 0.0 ):
+	var joint:PinJoint2D = PinJoint2D.new()
+	rb1[1].add_child(joint)
+	joint.position = (rb1[0])
+	joint.node_a = rb1[1].get_path()
+	joint.node_b = rb2[1].get_path()
+	joint.motor_enabled =true
+	joint.motor_target_velocity = _angular_vel
+	joint.disable_collision = false
+	joints.append(joint)
+	
+	
+
 
 func constructRigidBodies() -> void:
 	var i: int = 0
@@ -114,7 +155,7 @@ func constructRigidBodies() -> void:
 		rigidBody.add_child(line2d)
 		rigidBody.mass = len(line2d.points)
 		rigidBody.freeze = true
-		rigidBody.collision_mask = 2
+		rigidBody.collision_mask = 2 | 1
 
 		# rigidBody.kine
 		add_child(rigidBody)
@@ -147,6 +188,9 @@ func _draw() -> void:
 		# print(mouse_pos)
 		if _rigidBodies.is_empty():
 			return
+
+		var suitable_points_array:Array
+
 		for j in len(_rigidBodies):
 			var rb: RigidBody2D = _rigidBodies[j]
 			var children: Array = rb.get_children()
@@ -157,20 +201,33 @@ func _draw() -> void:
 
 					if (in_between_x(prev_pos, curr_pos, mouse_pos)):
 						var _pos = Vector2(mouse_pos.x, 0.5 * (prev_pos.y + curr_pos.y))
+						suitable_points_array.append([_pos,rb])
 						draw_circle(_pos, 10, Color.RED)
 					if (in_between_y(prev_pos, curr_pos, mouse_pos)):
 						var _pos = Vector2(0.5 * (prev_pos.x + curr_pos.x), mouse_pos.y)
+						suitable_points_array.append([_pos,rb])
 						draw_circle(_pos, 10, Color.RED)
 
-		var rbs = get_2_closest_rb(mouse_pos, _rigidBodies)
-		var closest = rbs[0]
-		var second_closest = rbs[1]
-		for i in range(len(_rigidBodies)):
-			var line: Line2D = _get_line2D(_rigidBodies[i])
-			if i == closest or i == second_closest:
-				line.width = 10
-			else:
-				line.width = 3
+		for joint in joints:
+			draw_circle(joint.global_position,10,Color.GREEN)
+		var rbIndices= get_2_closest_rb(mouse_pos, suitable_points_array)
+		if(len(rbIndices) == 0):
+			return
+		var closest = rbIndices[0]
+		var second_closest = rbIndices[1]
+
+		draw_circle(closest[0],10,Color.PURPLE)
+		draw_circle(second_closest[0],10,Color.PURPLE)
+		_joinable_rigidbodies = [closest,second_closest]
+		# for i in range(len(_rigidBodies)):
+		# 	var line: Line2D = _get_line2D(_rigidBodies[i])
+		# 	if i == closest or i == second_closest:
+		# 		line.width = 10
+		# 	else:
+		# 		line.width = 3
+
+
+		
 
 
 func _process(delta: float) -> void:
