@@ -9,12 +9,13 @@
 shader = ExtResource("3_ps0qp")
 shader_parameter/size = Vector2(32, 28)
 
-[node name="Draw Shapes" type="Node2D"]
+[node name="Draw Shapes2" type="Node2D"]
 metadata/_edit_vertical_guides_ = [-117.0]
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(8, 4)
 script = ExtResource("1_vsm6m")
+slope_collider_sensitivity = null
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

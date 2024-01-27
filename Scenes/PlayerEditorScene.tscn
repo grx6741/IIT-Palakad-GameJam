@@ -9,6 +9,7 @@ size = Vector2(1096, 125)
 
 [node name="Draw Shapes" type="Node2D"]
 script = ExtResource("1_cx4ow")
+slope_collider_sensitivity = null
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
@@ -35,7 +36,7 @@ anchor_right = 1.0
 offset_left = -158.0
 offset_bottom = 31.0
 grow_horizontal = 0
-item_count = 3
+item_count = 6
 selected = 0
 popup/item_0/text = "Normal Stroke"
 popup/item_0/id = 0
@@ -43,6 +44,12 @@ popup/item_1/text = "Eraser Stroke"
 popup/item_1/id = 1
 popup/item_2/text = "Joint Node"
 popup/item_2/id = 2
+popup/item_3/text = "Rotatory Stroke @ PI"
+popup/item_3/id = 3
+popup/item_4/text = "Rotatory Stroke @ 2PI"
+popup/item_4/id = 4
+popup/item_5/text = "Rotatory Stroke @ 3PI"
+popup/item_5/id = 5
 
 [node name="Button" type="Button" parent="UI"]
 anchors_preset = 1

@@ -4,7 +4,11 @@ enum StrokeMode {
 	NORMAL_STROKE,
 	ERASER_STROKE,
 	JOINT_STROKE,
+	ROTATION_STROKE_PI,
+	ROTATION_STROKE_2PI,
+	ROTATION_STROKE_3PI
 }
+
 
 var _lines: Array = []
 var _rigidBodies: Array = []
@@ -12,6 +16,9 @@ var _rigidBodies: Array = []
 var _optionNode: OptionButton
 var _clearButtonNode: Button
 var _unFreezeButtonNode : Button
+var _RotatoryRbs_Type1 : Array
+var _RotatoryRbs_Type2 : Array
+var _RotatoryRbs_Type3 : Array
 
 var _mouse_axis_point_map : Dictionary = {}
 var _joinable_rigidbodies:Array = []
@@ -83,6 +90,9 @@ func _on_button_pressed() -> void:
 		remove_child(rb)
 		rb.free()
 	_rigidBodies.clear()
+	_RotatoryRbs_Type1.clear()
+	_RotatoryRbs_Type2.clear()
+	_RotatoryRbs_Type3.clear()
 	_lines.clear()
 	joints.clear()
 
@@ -99,6 +109,32 @@ func _ready() -> void:
 	_clearButtonNode.focus_mode = BaseButton.FOCUS_NONE
 	_unFreezeButtonNode.focus_mode = BaseButton.FOCUS_NONE
 
+
+func drawLines(event:InputEvent,rotatory:bool = false):
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		if not event is InputEventKey:
+			# push mouse positions to array
+			if _lines.is_empty():
+				_lines.append(event.position)
+			else:
+				if _lines[-1] != event.position:
+					_lines.append(event.position)
+	else:
+		# push a null when not pressing mouse
+		if not _lines.is_empty() and _lines[-1] != null:
+			_lines.append(null)
+
+		# Now i can't press space when holding down left mouse
+		if event is InputEventKey:
+			if event.pressed and event.keycode == KEY_SPACE:
+				if(not rotatory):
+					constructRigidBodies()
+				if(rotatory):
+					constructRigidBodiesRotatory(_optionNode.get_selected_id())
+				_lines.clear()
+
+
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		return
@@ -110,24 +146,14 @@ func _input(event: InputEvent) -> void:
 					if (len(_joinable_rigidbodies) >= 2):
 						create_Joints(_joinable_rigidbodies[0], _joinable_rigidbodies[1], 10)
 		StrokeMode.NORMAL_STROKE:
-			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-				if not event is InputEventKey:
-					# push mouse positions to array
-					if _lines.is_empty():
-						_lines.append(event.position)
-					else:
-						if _lines[-1] != event.position:
-							_lines.append(event.position)
-			else:
-				# push a null when not pressing mouse
-				if not _lines.is_empty() and _lines[-1] != null:
-					_lines.append(null)
+			drawLines(event)
+		StrokeMode.ROTATION_STROKE_PI :
+			drawLines(event,true)
+		StrokeMode.ROTATION_STROKE_2PI :
+			drawLines(event,true)
+		StrokeMode.ROTATION_STROKE_3PI :
+			drawLines(event,true)
 
-				# Now i can't press space when holding down left mouse
-				if event is InputEventKey:
-					if event.pressed and event.keycode == KEY_SPACE:
-						constructRigidBodies()
-						_lines.clear()
 
 func create_Joints(rb1, rb2, _angular_vel:float = 0.0 ):
 	var joint:PinJoint2D = PinJoint2D.new()
@@ -137,7 +163,7 @@ func create_Joints(rb1, rb2, _angular_vel:float = 0.0 ):
 	joint.node_b = rb2[1].get_path()
 	joint.motor_enabled =true
 	joint.motor_target_velocity = _angular_vel
-	joint.disable_collision = false
+	joint.disable_collision = true 
 	joints.append(joint)
 	
 	
@@ -166,6 +192,42 @@ func constructRigidBodies() -> void:
 		# rigidBody.kine
 		add_child(rigidBody)
 		_rigidBodies.append(rigidBody)
+		i = j + 1
+		j = get_null(_lines, i)
+
+
+
+func constructRigidBodiesRotatory(type:StrokeMode) -> void:
+	var i: int = 0
+	var j: int = get_null(_lines, i)
+
+	while j > 0:
+		var line2d: Line2D = Line2D.new()
+		while i < j:
+			line2d.add_point(_lines[i] - line2d.global_position)
+			line2d.width = 3
+			i += 1
+		if line2d.get_point_count() < 1:
+			continue
+
+		var rigidBody = RigidBody2D.new()
+		handleColliderCreation(rigidBody, line2d.points)
+		rigidBody.add_child(line2d)
+
+		rigidBody.mass = len(line2d.points)
+		rigidBody.freeze = true
+		rigidBody.collision_mask = 2 | 1
+
+		# rigidBody.kine
+		add_child(rigidBody)
+		_rigidBodies.append(rigidBody)
+		match type:
+			StrokeMode.ROTATION_STROKE_PI:
+				_RotatoryRbs_Type1.append(rigidBody)
+			StrokeMode.ROTATION_STROKE_2PI:
+				_RotatoryRbs_Type2.append(rigidBody)
+			StrokeMode.ROTATION_STROKE_3PI:
+				_RotatoryRbs_Type3.append(rigidBody)
 		i = j + 1
 		j = get_null(_lines, i)
 
@@ -237,6 +299,13 @@ func _draw() -> void:
 
 		
 
+func _physics_process(delta):
+	for rb in _RotatoryRbs_Type1:
+		rb.angular_velocity = PI
+	for rb in _RotatoryRbs_Type2:
+		rb.angular_velocity = 4*PI
+	for rb in _RotatoryRbs_Type3:
+		rb.angular_velocity = 6*PI
 
 func _process(delta: float) -> void:
 	queue_redraw()
