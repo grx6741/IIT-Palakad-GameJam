@@ -14,7 +14,6 @@ var _clearButtonNode: Button
 var _unFreezeButtonNode : Button
 
 var _mouse_axis_point_map : Dictionary = {}
-var _cell_size: int = 20
 var _joinable_rigidbodies:Array = []
 var joints = []
 # Helper Functions
@@ -50,7 +49,7 @@ func get_2_closest_rb(pos: Vector2, rbs: Array) -> Array:
 		var p: Vector2 = rbs[i][0]
 		var dist: float = p.distance_squared_to(pos)
 		if dist < _second_closest_distance and rbs[i][1] != rbs[_closest][1]:
-			print(rbs[i][1]," : ",rbs[_closest][1])
+			# print(rbs[i][1]," : ",rbs[_closest][1])
 			_second_closest = i
 			_second_closest_distance = dist
 
@@ -85,10 +84,11 @@ func _on_button_pressed() -> void:
 		rb.free()
 	_rigidBodies.clear()
 	_lines.clear()
+	joints.clear()
 
 func _on_button_2_pressed():
 	for rb in _rigidBodies:
-		rb.freeze = false
+		rb.freeze = not rb.freeze
 
 func _ready() -> void:
 	_optionNode = get_node("UI/StrokeOptions")
@@ -102,28 +102,34 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventJoypadButton or event is InputEventJoypadMotion:
 		return
-	if event is InputEventKey and event.pressed and not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		if event.keycode == KEY_SPACE and _optionNode.get_selected_id() != StrokeMode.JOINT_STROKE:
-			constructRigidBodies()
-			_lines.clear()
-		elif event.keycode == KEY_SPACE and _optionNode.get_selected_id() == StrokeMode.JOINT_STROKE:
-			print("I am Here")
-			if(len(_joinable_rigidbodies) >= 2):
-				create_Joints(_joinable_rigidbodies[0],_joinable_rigidbodies[1],10.0)
+	
+	match _optionNode.get_selected_id():
+		StrokeMode.JOINT_STROKE:
+			if event is InputEventKey:
+				if event.keycode == KEY_SPACE:
+					if (len(_joinable_rigidbodies) >= 2):
+						create_Joints(_joinable_rigidbodies[0], _joinable_rigidbodies[1], 10)
+		StrokeMode.NORMAL_STROKE:
+			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+				if not event is InputEventKey:
+					# push mouse positions to array
+					if _lines.is_empty():
+						_lines.append(event.position)
+					else:
+						if _lines[-1] != event.position:
+							_lines.append(event.position)
+			else:
+				# push a null when not pressing mouse
+				if not _lines.is_empty() and _lines[-1] != null:
+					_lines.append(null)
 
-	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		if not _lines.is_empty() and _lines[-1] != null:
-			_lines.append(null)
-		return
-	if not event is InputEventKey:
-		if _lines.is_empty():
-			_lines.append(event.position)
-		else:
-			if _lines[-1] != event.position:
-				_lines.append(event.position)
-		# queue_redraw()
+				# Now i can't press space when holding down left mouse
+				if event is InputEventKey:
+					if event.pressed and event.keycode == KEY_SPACE:
+						constructRigidBodies()
+						_lines.clear()
 
-func create_Joints(rb1,rb2,_angular_vel:float = 0.0 ):
+func create_Joints(rb1, rb2, _angular_vel:float = 0.0 ):
 	var joint:PinJoint2D = PinJoint2D.new()
 	rb1[1].add_child(joint)
 	joint.position = (rb1[0])
@@ -189,7 +195,7 @@ func _draw() -> void:
 		if _rigidBodies.is_empty():
 			return
 
-		var suitable_points_array:Array
+		var suitable_points_array: Array = []
 
 		for j in len(_rigidBodies):
 			var rb: RigidBody2D = _rigidBodies[j]
@@ -208,8 +214,10 @@ func _draw() -> void:
 						suitable_points_array.append([_pos,rb])
 						draw_circle(_pos, 10, Color.RED)
 
-		for joint in joints:
-			draw_circle(joint.global_position,10,Color.GREEN)
+		if not joints.is_empty():
+			for joint in joints:
+				draw_circle(joint.global_position,10,Color.GREEN)
+
 		var rbIndices= get_2_closest_rb(mouse_pos, suitable_points_array)
 		if(len(rbIndices) == 0):
 			return
