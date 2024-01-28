@@ -11,7 +11,7 @@ func _ready():
 	pass 
 
 func createCollider(rigidbody: RigidBody2D, length:float,angle:float,pos:Vector2):
-	print(rigidbody.name)
+	# print(rigidbody.name)
 	var collider : CollisionShape2D = CollisionShape2D.new()
 	collider.shape = CapsuleShape2D.new()
 	collider.rotation = PI/2 + angle

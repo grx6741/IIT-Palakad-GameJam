@@ -12,7 +12,7 @@ enum StrokeMode {
 
 var _lines: Array = []
 var _rigidBodies: Array = []
-
+var _erasable_body : int
 var _optionNode: OptionButton
 var _clearButtonNode: Button
 var _unFreezeButtonNode : Button
@@ -115,10 +115,10 @@ func drawLines(event:InputEvent,rotatory:bool = false):
 		if not event is InputEventKey:
 			# push mouse positions to array
 			if _lines.is_empty():
-				_lines.append(event.position)
+				_lines.append(get_global_mouse_position())
 			else:
-				if _lines[-1] != event.position:
-					_lines.append(event.position)
+				if _lines[-1] != get_global_mouse_position():
+					_lines.append(get_global_mouse_position())
 	else:
 		# push a null when not pressing mouse
 		if not _lines.is_empty() and _lines[-1] != null:
@@ -147,12 +147,22 @@ func _input(event: InputEvent) -> void:
 						create_Joints(_joinable_rigidbodies[0], _joinable_rigidbodies[1], 10)
 		StrokeMode.NORMAL_STROKE:
 			drawLines(event)
+		StrokeMode.ERASER_STROKE:
+			if event is InputEventKey:
+				if event.keycode == KEY_SPACE and _erasable_body != -1:
+					remove_child(_rigidBodies[_erasable_body])
+					_rigidBodies[_erasable_body].free()
+					_rigidBodies.pop_at(_erasable_body)
+					_erasable_body = -1
 		StrokeMode.ROTATION_STROKE_PI :
 			drawLines(event,true)
 		StrokeMode.ROTATION_STROKE_2PI :
 			drawLines(event,true)
 		StrokeMode.ROTATION_STROKE_3PI :
 			drawLines(event,true)
+
+
+# func eraseStrokes() -> void:
 
 
 func create_Joints(rb1, rb2, _angular_vel:float = 0.0 ):
@@ -250,9 +260,28 @@ func _draw() -> void:
 			draw_circle(prev, 5, Color.BLACK)
 			draw_circle(curr, 5, Color.BLACK)
 			i += 1
-	if _optionNode.get_selected_id() == StrokeMode.JOINT_STROKE:
+
+	if _optionNode.get_selected_id() == StrokeMode.ERASER_STROKE:
 		_mouse_axis_point_map.clear()
-		var mouse_pos: Vector2i = get_viewport().get_mouse_position()
+		var mouse_pos: Vector2i = get_global_mouse_position()
+		if _rigidBodies.is_empty():
+			return
+
+		for j in len(_rigidBodies):
+			var rb: RigidBody2D = _rigidBodies[j]
+			var children: Array = rb.get_children()
+			for i in range(1, children.size()):
+				if children[i] is CollisionShape2D:
+					var prev_pos = children[i-1].global_position
+					var curr_pos = children[i].global_position
+
+					if (in_between_x(prev_pos, curr_pos, mouse_pos) and in_between_y(prev_pos, curr_pos, mouse_pos)):
+						var _pos = Vector2(mouse_pos.x, 0.5 * (prev_pos.y + curr_pos.y))
+						_erasable_body = j
+						draw_circle(_pos, 10, Color.RED)
+	elif _optionNode.get_selected_id() == StrokeMode.JOINT_STROKE:
+		_mouse_axis_point_map.clear()
+		var mouse_pos: Vector2i = get_global_mouse_position()
 		# print(mouse_pos)
 		if _rigidBodies.is_empty():
 			return
@@ -295,6 +324,9 @@ func _draw() -> void:
 		# 		line.width = 10
 		# 	else:
 		# 		line.width = 3
+	else:
+		_erasable_body = -1
+
 
 
 		

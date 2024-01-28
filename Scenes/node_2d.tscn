@@ -15,7 +15,6 @@ metadata/_edit_vertical_guides_ = [-117.0]
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(8, 4)
 script = ExtResource("1_vsm6m")
-slope_collider_sensitivity = null
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

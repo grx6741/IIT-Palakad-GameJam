@@ -9,7 +9,6 @@ size = Vector2(1096, 125)
 
 [node name="Draw Shapes" type="Node2D"]
 script = ExtResource("1_cx4ow")
-slope_collider_sensitivity = null
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
@@ -72,6 +71,8 @@ offset_top = 100.0
 offset_bottom = 131.0
 grow_horizontal = 0
 text = "Unfreeze"
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [connection signal="pressed" from="UI/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="UI/Button2" to="." method="_on_button_2_pressed"]
