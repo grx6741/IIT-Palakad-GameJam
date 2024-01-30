@@ -1,11 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d4jm0bnm8mp8n"]
+[gd_scene load_steps=4 format=3 uid="uid://d4jm0bnm8mp8n"]
 
 [ext_resource type="Script" path="res://Scripts/mouse_draw.gd" id="1_cx4ow"]
 [ext_resource type="Script" path="res://Scripts/Label.gd" id="2_538yw"]
-[ext_resource type="Texture2D" uid="uid://bhhjo4ktqngiy" path="res://icon.svg" id="3_g5ojc"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ov88"]
-size = Vector2(1096, 125)
+[ext_resource type="PackedScene" uid="uid://cynjrc0o440co" path="res://Scenes/player_interface.tscn" id="4_ffi35"]
 
 [node name="Draw Shapes" type="Node2D"]
 script = ExtResource("1_cx4ow")
@@ -15,64 +12,4 @@ offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("2_538yw")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(764, 551)
-collision_layer = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-scale = Vector2(8.52344, 1)
-texture = ExtResource("3_g5ojc")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_5ov88")
-
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="StrokeOptions" type="OptionButton" parent="UI"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -158.0
-offset_bottom = 31.0
-grow_horizontal = 0
-item_count = 6
-selected = 0
-popup/item_0/text = "Normal Stroke"
-popup/item_0/id = 0
-popup/item_1/text = "Eraser Stroke"
-popup/item_1/id = 1
-popup/item_2/text = "Joint Node"
-popup/item_2/id = 2
-popup/item_3/text = "Rotatory Stroke @ PI"
-popup/item_3/id = 3
-popup/item_4/text = "Rotatory Stroke @ 2PI"
-popup/item_4/id = 4
-popup/item_5/text = "Rotatory Stroke @ 3PI"
-popup/item_5/id = 5
-
-[node name="Button" type="Button" parent="UI"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -158.0
-offset_top = 46.0
-offset_bottom = 77.0
-grow_horizontal = 0
-action_mode = 0
-text = "Clear
-"
-
-[node name="Button2" type="Button" parent="UI"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -158.0
-offset_top = 100.0
-offset_bottom = 131.0
-grow_horizontal = 0
-text = "Unfreeze"
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[connection signal="pressed" from="UI/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="UI/Button2" to="." method="_on_button_2_pressed"]
+[node name="PlayerInterface" parent="." instance=ExtResource("4_ffi35")]

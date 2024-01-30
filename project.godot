@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="IIT-Palakad"
-run/main_scene="res://Scenes/PlayerEditorScene.tscn"
+run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Assets/icon.svg"
+
+[display]
+
+window/size/mode=3
 
 [file_customization]
 
@@ -22,6 +26,10 @@ folder_colors={
 "res://Scripts/": "green",
 "res://Shaders/": "teal"
 }
+
+[filesystem]
+
+import/blender/enabled=false
 
 [input]
 
