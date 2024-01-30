@@ -1,5 +1,11 @@
 extends "res://Scripts/create_colliders.gd"
 
+@onready var inkBar: TextureProgressBar = get_node("UI/TextureProgressBar")
+@onready var popup: Panel = get_node("UI/Lvl_Comp_Popup")
+
+func ink_drain(drain):
+	inkBar.value -= drain
+
 enum StrokeMode {
 	NORMAL_STROKE,
 	ERASER_STROKE,
@@ -8,7 +14,6 @@ enum StrokeMode {
 	ROTATION_STROKE_2PI,
 	ROTATION_STROKE_3PI
 }
-
 
 var _lines: Array = []
 var _rigidBodies: Array = []
@@ -19,10 +24,27 @@ var _unFreezeButtonNode : Button
 var _RotatoryRbs_Type1 : Array
 var _RotatoryRbs_Type2 : Array
 var _RotatoryRbs_Type3 : Array
+var insideUI = false
+
+@export var normalColor = Color.WHITE
+@export var rotatoryColor = Color.YELLOW
+@export var rotatory2Color = Color.ORANGE
+@export var rotatory3Color = Color.SADDLE_BROWN
+@export var drain_val = 1
+
+var strokeColor: Color = normalColor
+var _limitVal : int 
 
 var _mouse_axis_point_map : Dictionary = {}
 var _joinable_rigidbodies:Array = []
 var joints = []
+
+func _on_panel_mouse_entered():
+	insideUI = true
+
+func _on_panel_mouse_exited():
+	insideUI = false
+
 # Helper Functions
 
 func get_null(array: Array, start: int = 0) -> int:
@@ -86,21 +108,31 @@ func get_2_closest_rb(pos: Vector2, rbs: Array) -> Array:
 # Button Handles
 
 func _on_button_pressed() -> void:
-	for rb in _rigidBodies:
-		remove_child(rb)
-		rb.free()
-	_rigidBodies.clear()
-	_RotatoryRbs_Type1.clear()
-	_RotatoryRbs_Type2.clear()
-	_RotatoryRbs_Type3.clear()
+	if len(_lines) > 1:
+		clear_temp_lines()
+	else:
+		for rb in _rigidBodies:
+			remove_child(rb)
+			rb.free()
+		_rigidBodies.clear()
+		_RotatoryRbs_Type1.clear()
+		_RotatoryRbs_Type2.clear()
+		_RotatoryRbs_Type3.clear()
+		joints.clear()
+		inkBar.value = _limitVal
+
+func clear_temp_lines() -> void:
 	_lines.clear()
-	joints.clear()
+	inkBar.value = _limitVal
 
 func _on_button_2_pressed():
+	$Heart.freeze = false
 	for rb in _rigidBodies:
 		rb.freeze = not rb.freeze
 
 func _ready() -> void:
+	@warning_ignore("narrowing_conversion")
+	_limitVal = inkBar.max_value
 	_optionNode = get_node("UI/StrokeOptions")
 	_clearButtonNode = get_node("UI/Button")
 	_unFreezeButtonNode = get_node("UI/Button2")
@@ -111,7 +143,8 @@ func _ready() -> void:
 
 
 func drawLines(event:InputEvent,rotatory:bool = false):
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and inkBar.value > 0 and not insideUI:
+		ink_drain(drain_val)
 		if not event is InputEventKey:
 			# push mouse positions to array
 			if _lines.is_empty():
@@ -146,23 +179,29 @@ func _input(event: InputEvent) -> void:
 					if (len(_joinable_rigidbodies) >= 2):
 						create_Joints(_joinable_rigidbodies[0], _joinable_rigidbodies[1], 10)
 		StrokeMode.NORMAL_STROKE:
+			strokeColor = normalColor
 			drawLines(event)
 		StrokeMode.ERASER_STROKE:
 			if event is InputEventKey:
 				if event.keycode == KEY_SPACE and _erasable_body != -1:
+					joints.clear()
+					_joinable_rigidbodies.clear()
 					remove_child(_rigidBodies[_erasable_body])
 					_rigidBodies[_erasable_body].free()
 					_rigidBodies.pop_at(_erasable_body)
 					_erasable_body = -1
 		StrokeMode.ROTATION_STROKE_PI :
+			strokeColor = rotatoryColor
 			drawLines(event,true)
 		StrokeMode.ROTATION_STROKE_2PI :
+			strokeColor = rotatory2Color
 			drawLines(event,true)
 		StrokeMode.ROTATION_STROKE_3PI :
+			strokeColor = rotatory3Color
 			drawLines(event,true)
 
 
-# func eraseStrokes() -> void:
+# func eraseStrokes() -> void: 
 
 
 func create_Joints(rb1, rb2, _angular_vel:float = 0.0 ):
@@ -176,15 +215,16 @@ func create_Joints(rb1, rb2, _angular_vel:float = 0.0 ):
 	joint.disable_collision = true 
 	joints.append(joint)
 	
-	
-
 
 func constructRigidBodies() -> void:
 	var i: int = 0
 	var j: int = get_null(_lines, i)
-
+	@warning_ignore("narrowing_conversion")
+	_limitVal = inkBar.value
+	
 	while j > 0:
 		var line2d: Line2D = Line2D.new()
+		line2d.set_default_color(strokeColor) 
 		while i < j:
 			line2d.add_point(_lines[i] - line2d.global_position)
 			line2d.width = 3
@@ -205,14 +245,15 @@ func constructRigidBodies() -> void:
 		i = j + 1
 		j = get_null(_lines, i)
 
-
-
 func constructRigidBodiesRotatory(type:StrokeMode) -> void:
 	var i: int = 0
 	var j: int = get_null(_lines, i)
+	@warning_ignore("narrowing_conversion")
+	_limitVal = inkBar.value
 
 	while j > 0:
 		var line2d: Line2D = Line2D.new()
+		line2d.set_default_color(strokeColor)
 		while i < j:
 			line2d.add_point(_lines[i] - line2d.global_position)
 			line2d.width = 3
@@ -223,11 +264,9 @@ func constructRigidBodiesRotatory(type:StrokeMode) -> void:
 		var rigidBody = RigidBody2D.new()
 		handleColliderCreation(rigidBody, line2d.points)
 		rigidBody.add_child(line2d)
-
 		rigidBody.mass = len(line2d.points)
 		rigidBody.freeze = true
-		rigidBody.collision_mask = 2 | 1
-
+		rigidBody.add_collision_exception_with($Heart)
 		# rigidBody.kine
 		add_child(rigidBody)
 		_rigidBodies.append(rigidBody)
@@ -326,18 +365,21 @@ func _draw() -> void:
 		# 		line.width = 3
 	else:
 		_erasable_body = -1
-
-
-
 		
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	for rb in _RotatoryRbs_Type1:
-		rb.angular_velocity = PI
+		if(is_instance_valid(rb)):
+			rb.angular_velocity = PI
 	for rb in _RotatoryRbs_Type2:
-		rb.angular_velocity = 4*PI
+		if(is_instance_valid(rb)):
+				rb.angular_velocity = 2*PI
 	for rb in _RotatoryRbs_Type3:
-		rb.angular_velocity = 6*PI
+		if(is_instance_valid(rb)):
+			rb.angular_velocity = 3*PI
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	queue_redraw()
+
+func _on_win_heart_level_comp():
+	popup.visible = true

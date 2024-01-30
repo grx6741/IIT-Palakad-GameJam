@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ct1lrt1x1hocs"]
 
 [ext_resource type="Script" path="res://Scripts/create_colliders.gd" id="1_n0q5i"]
-[ext_resource type="Texture2D" uid="uid://bhhjo4ktqngiy" path="res://icon.svg" id="2_3ayai"]
+[ext_resource type="Texture2D" uid="uid://bhhjo4ktqngiy" path="res://Assets/icon.svg" id="2_3ayai"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3gd24"]
 height = 160.273
