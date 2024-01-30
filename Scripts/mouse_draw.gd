@@ -338,11 +338,9 @@ func _draw() -> void:
 					if (in_between_x(prev_pos, curr_pos, mouse_pos)):
 						var _pos = Vector2(mouse_pos.x, 0.5 * (prev_pos.y + curr_pos.y))
 						suitable_points_array.append([_pos,rb])
-						draw_circle(_pos, 10, Color.RED)
 					if (in_between_y(prev_pos, curr_pos, mouse_pos)):
 						var _pos = Vector2(0.5 * (prev_pos.x + curr_pos.x), mouse_pos.y)
 						suitable_points_array.append([_pos,rb])
-						draw_circle(_pos, 10, Color.RED)
 
 		if not joints.is_empty():
 			for joint in joints:

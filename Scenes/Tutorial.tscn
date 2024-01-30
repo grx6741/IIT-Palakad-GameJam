@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://cf4yq0avlj0uy"]
+
+[ext_resource type="PackedScene" uid="uid://cynjrc0o440co" path="res://Scenes/player_interface.tscn" id="1_fis8m"]
+[ext_resource type="Script" path="res://Scripts/Tutorial.gd" id="2_ehwq3"]
+[ext_resource type="Texture2D" uid="uid://boehagopeqkc3" path="res://Assets/Arrow.png" id="3_j4f6m"]
+
+[node name="Tutorial" type="Node2D"]
+
+[node name="PlayerInterface" parent="." instance=ExtResource("1_fis8m")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("2_ehwq3")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 41.0
+offset_top = -229.0
+offset_right = -61.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Click and Drag to draw"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -604.0
+offset_top = -34.0
+offset_right = -277.0
+offset_bottom = 168.0
+grow_horizontal = 0
+texture = ExtResource("3_j4f6m")
+expand_mode = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -641.0
+offset_top = 118.0
+offset_right = -407.0
+offset_bottom = 183.0
+grow_horizontal = 0
+text = "Click to Change Stroke Type"
