@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/mouse_draw.gd" id="1_vsm6m"]
 [ext_resource type="Shader" path="res://Shaders/Post_Processing.gdshader" id="3_ps0qp"]
 [ext_resource type="Script" path="res://Scripts/Label.gd" id="4_b85w3"]
-[ext_resource type="Texture2D" uid="uid://bhhjo4ktqngiy" path="res://icon.svg" id="4_cuitd"]
+[ext_resource type="Texture2D" uid="uid://bhhjo4ktqngiy" path="res://Assets/icon.svg" id="4_cuitd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_55l7g"]
 shader = ExtResource("3_ps0qp")
