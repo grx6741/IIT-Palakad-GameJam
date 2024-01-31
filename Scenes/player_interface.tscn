@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cynjrc0o440co"]
+[gd_scene load_steps=13 format=3 uid="uid://cynjrc0o440co"]
 
 [ext_resource type="Script" path="res://Scripts/mouse_draw.gd" id="1_as20b"]
-[ext_resource type="PackedScene" uid="uid://d16fevi1yesar" path="res://Scenes/heart.tscn" id="1_vf7uf"]
-[ext_resource type="Texture2D" uid="uid://k70gbtd8hj23" path="res://Assets/Pen-dr1.png" id="3_155gi"]
-[ext_resource type="Texture2D" uid="uid://bbgynfrb6wj7y" path="res://Assets/PenFill-dr1.png" id="4_1ck45"]
+[ext_resource type="Texture2D" uid="uid://ddxyjm825md3t" path="res://Assets/Pen-dr2.png" id="3_ka01o"]
+[ext_resource type="Texture2D" uid="uid://b1iym8c4lfn04" path="res://Assets/PenFill-dr2.png" id="4_jo5pj"]
+[ext_resource type="Texture2D" uid="uid://d2q0uolj0q6br" path="res://Assets/Pause-dr1.png" id="5_fv28p"]
 [ext_resource type="PackedScene" uid="uid://ddgwyc140y1r" path="res://Scenes/lvl_comp_popup.tscn" id="5_plha6"]
+[ext_resource type="Texture2D" uid="uid://dbynb67j17w1u" path="res://Assets/Retry-dr1.png" id="6_m7dqb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pljce"]
 bg_color = Color(0, 0, 0, 0.196078)
@@ -20,36 +21,88 @@ corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 corner_detail = 9
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6jffh"]
+bg_color = Color(0.219608, 0.219608, 0.219608, 0.784314)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pd8rq"]
+bg_color = Color(0, 0, 0, 0.392157)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 120
+corner_radius_top_right = 120
+corner_radius_bottom_right = 120
+corner_radius_bottom_left = 120
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f5g2y"]
+bg_color = Color(0.333333, 0.333333, 0.333333, 0.784314)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 120
+corner_radius_top_right = 120
+corner_radius_bottom_right = 120
+corner_radius_bottom_left = 120
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y228y"]
+bg_color = Color(0, 0, 0, 0.470588)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 120
+corner_radius_top_right = 120
+corner_radius_bottom_right = 120
+corner_radius_bottom_left = 120
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcufg"]
+bg_color = Color(0, 0, 0, 0.392157)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 120
+corner_radius_top_right = 120
+corner_radius_bottom_right = 120
+corner_radius_bottom_left = 120
+
 [node name="PlayerInterface" type="Node2D"]
 script = ExtResource("1_as20b")
 rotatory3Color = Color(1, 0, 0, 1)
 
-[node name="Heart" parent="." instance=ExtResource("1_vf7uf")]
-position = Vector2(576, 324)
-
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Panel" type="Panel" parent="UI"]
+[node name="DrawMenu" type="Panel" parent="UI"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -328.0
-offset_bottom = 206.0
+offset_left = -430.0
+offset_top = 19.0
+offset_right = -20.0
+offset_bottom = 286.0
 grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_pljce")
 metadata/_edit_lock_ = true
 
-[node name="StrokeOptions" type="OptionButton" parent="UI"]
+[node name="StrokeOptions" type="OptionButton" parent="UI/DrawMenu"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -323.0
-offset_top = 23.0
-offset_right = -5.0
-offset_bottom = 70.0
+offset_left = -403.0
+offset_top = 20.0
+offset_right = -7.0
+offset_bottom = 89.0
 grow_horizontal = 0
 size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_6jffh")
 alignment = 1
 item_count = 6
 selected = 0
@@ -66,49 +119,107 @@ popup/item_4/id = 4
 popup/item_5/text = "Rotatory Stroke @ 3PI"
 popup/item_5/id = 5
 
-[node name="Button" type="Button" parent="UI"]
+[node name="Button" type="Button" parent="UI/DrawMenu"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -248.0
-offset_top = 89.0
-offset_right = -74.0
-offset_bottom = 132.0
+offset_left = -378.0
+offset_top = 182.0
+offset_right = -30.0
+offset_bottom = 248.0
 grow_horizontal = 0
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 28
+theme_override_styles/hover = SubResource("StyleBoxFlat_6jffh")
 action_mode = 0
 text = "Clear
 "
 
-[node name="Button2" type="Button" parent="UI"]
+[node name="Button2" type="Button" parent="UI/DrawMenu"]
+layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -248.0
-offset_top = 142.0
-offset_right = -74.0
-offset_bottom = 185.0
+offset_left = -378.0
+offset_top = 102.0
+offset_right = -30.0
+offset_bottom = 168.0
 grow_horizontal = 0
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 28
+theme_override_styles/hover = SubResource("StyleBoxFlat_6jffh")
 text = "Transform"
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="UI"]
-offset_left = 45.0
-offset_top = 56.0
-offset_right = 456.0
-offset_bottom = 1794.0
-scale = Vector2(0.18824, 0.18824)
-max_value = 1000.0
-value = 1000.0
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -221.0
+offset_right = 431.0
+offset_bottom = 1517.0
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+max_value = 2000.0
+value = 2000.0
 fill_mode = 3
-texture_under = ExtResource("3_155gi")
-texture_progress = ExtResource("4_1ck45")
+texture_under = ExtResource("3_ka01o")
+texture_progress = ExtResource("4_jo5pj")
 texture_progress_offset = Vector2(170, 200)
 
 [node name="Lvl_Comp_Popup" parent="UI" instance=ExtResource("5_plha6")]
 visible = false
 
-[connection signal="mouse_entered" from="UI/Panel" to="." method="_on_panel_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Panel" to="." method="_on_panel_mouse_exited"]
-[connection signal="pressed" from="UI/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="UI/Button2" to="." method="_on_button_2_pressed"]
+[node name="Level_Num" type="RichTextLabel" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -132.0
+offset_top = 72.0
+offset_right = 134.0
+offset_bottom = 146.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_font_sizes/normal_font_size = 50
+
+[node name="PauseBtn" type="Button" parent="UI"]
+offset_left = 16.0
+offset_top = 13.0
+offset_right = 936.0
+offset_bottom = 933.0
+scale = Vector2(0.14, 0.14)
+theme_override_styles/normal = SubResource("StyleBoxFlat_pd8rq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f5g2y")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_y228y")
+action_mode = 0
+icon = ExtResource("5_fv28p")
+icon_alignment = 1
+
+[node name="RetryBtn" type="Button" parent="UI"]
+offset_left = 164.0
+offset_top = 13.0
+offset_right = 1084.0
+offset_bottom = 933.0
+scale = Vector2(0.14, 0.14)
+theme_override_styles/normal = SubResource("StyleBoxFlat_fcufg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f5g2y")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_y228y")
+action_mode = 0
+icon = ExtResource("6_m7dqb")
+
+[connection signal="mouse_entered" from="UI/DrawMenu" to="." method="_on_panel_mouse_entered"]
+[connection signal="mouse_exited" from="UI/DrawMenu" to="." method="_on_panel_mouse_exited"]
+[connection signal="mouse_entered" from="UI/DrawMenu/StrokeOptions" to="." method="_on_stroke_options_mouse_entered"]
+[connection signal="mouse_exited" from="UI/DrawMenu/StrokeOptions" to="." method="_on_stroke_options_mouse_exited"]
+[connection signal="mouse_entered" from="UI/DrawMenu/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="UI/DrawMenu/Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="UI/DrawMenu/Button" to="." method="_on_button_pressed"]
+[connection signal="mouse_entered" from="UI/DrawMenu/Button2" to="." method="_on_button_2_mouse_entered"]
+[connection signal="mouse_exited" from="UI/DrawMenu/Button2" to="." method="_on_button_2_mouse_exited"]
+[connection signal="pressed" from="UI/DrawMenu/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="mouse_entered" from="UI/PauseBtn" to="." method="_on_pause_btn_mouse_entered"]
+[connection signal="mouse_exited" from="UI/PauseBtn" to="." method="_on_pause_btn_mouse_exited"]
+[connection signal="mouse_entered" from="UI/RetryBtn" to="." method="_on_retry_btn_mouse_entered"]
+[connection signal="mouse_exited" from="UI/RetryBtn" to="." method="_on_retry_btn_mouse_exited"]
+[connection signal="pressed" from="UI/RetryBtn" to="." method="_on_retry_btn_pressed"]

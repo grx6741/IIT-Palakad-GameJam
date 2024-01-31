@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://bx0qkh0i8ehpk"]
+
+[ext_resource type="Script" path="res://game_manager.gd" id="1_m5wym"]
+[ext_resource type="PackedScene" uid="uid://dkcu7hqemxaw1" path="res://Levels/level_1.tscn" id="2_bfk7h"]
+[ext_resource type="PackedScene" uid="uid://byr6m2fsufubt" path="res://Levels/level_2.tscn" id="3_p5kxh"]
+[ext_resource type="PackedScene" uid="uid://cieyugy7noaqm" path="res://Levels/level_3.tscn" id="4_8c1xq"]
+[ext_resource type="PackedScene" uid="uid://vs0vsyyc8n0t" path="res://Levels/level_4.tscn" id="5_trs7c"]
+[ext_resource type="PackedScene" uid="uid://cvn4gdo3l51ws" path="res://Levels/level_5.tscn" id="6_mjidl"]
+[ext_resource type="PackedScene" uid="uid://s4n5fviiktw1" path="res://UI/pause_menu.tscn" id="7_gfnte"]
+
+[node name="Game" type="Node"]
+process_mode = 3
+script = ExtResource("1_m5wym")
+
+[node name="Level_1" parent="." instance=ExtResource("2_bfk7h")]
+visible = false
+
+[node name="Level_2" parent="." instance=ExtResource("3_p5kxh")]
+visible = false
+
+[node name="Level_3" parent="." instance=ExtResource("4_8c1xq")]
+visible = false
+
+[node name="Level_4" parent="." instance=ExtResource("5_trs7c")]
+visible = false
+
+[node name="Level_5" parent="." instance=ExtResource("6_mjidl")]
+visible = false
+
+[node name="Pause_Menu" parent="." instance=ExtResource("7_gfnte")]

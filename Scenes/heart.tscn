@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d16fevi1yesar"]
 
-[ext_resource type="Texture2D" uid="uid://cv287rd0rq1da" path="res://Assets/Red_Heart.png" id="1_4tiwb"]
+[ext_resource type="Texture2D" uid="uid://bxl6cxllm2emr" path="res://Assets/HollowHeart-dr2.png" id="1_kow8l"]
 
 [node name="Heart" type="RigidBody2D"]
 collision_layer = 8
@@ -8,10 +8,12 @@ collision_priority = 2.0
 freeze = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(0, -20, 6, -23, 9, -24, 14, -25, 18, -24, 22, -22, 25, -17, 26, -14, 25.5863, -9.6902, 25, -5, 23, 0, 21, 4, 16, 11, 11, 16, 5, 22, 0, 26, -6, 21, -15, 12, -21, 4, -23, 0, -25, -5, -26, -10, -26, -14, -24, -19, -22, -22, -18, -24, -15, -25, -12, -25, -6, -23)
+scale = Vector2(2, 2)
+polygon = PackedVector2Array(0, -15.3333, 3.33333, -18.6667, 6.38916, -20.7621, 9.42278, -21.7297, 12.6667, -22, 16.2496, -21.2085, 18.6667, -20, 22, -17.3333, 23.995, -14.015, 24.6667, -12, 25.0507, -8.40565, 24.6667, -5.33333, 24, -3.33333, 23.3333, -2, 22, 0, 0.666667, 22, 0.666667, 22, 0, 22, -0.666667, 22, -22.0425, -0.00618267, -23.5215, -2.19332, -24.3471, -4.1068, -24.9341, -6.47286, -25.0889, -9.06205, -24.7073, -11.7611, -23.8741, -14.1046, -22.7642, -16.1184, -21.1267, -18.042, -18.7891, -19.9388, -16, -21.3333, -14.5511, -21.7165, -12, -22, -10.016, -21.8287, -7.47965, -21.1881, -5.72092, -20.3721, -3.33333, -18.6667)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_4tiwb")
+scale = Vector2(0.132, 0.132)
+texture = ExtResource("1_kow8l")
+metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]

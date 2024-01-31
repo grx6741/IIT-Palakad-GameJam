@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bc0dk71af04ig"]
 
-[ext_resource type="Texture2D" uid="uid://dv3sa4ohnrisx" path="res://Assets/Hollow_Red_Heart.png" id="1_n162d"]
 [ext_resource type="Script" path="res://Scripts/win_heart.gd" id="1_wxkt8"]
+[ext_resource type="Texture2D" uid="uid://cjj5j5sk5feid" path="res://Assets/HollowHeart-dr3.png" id="2_idxtl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x0ags"]
 radius = 57.0088
@@ -15,8 +15,8 @@ script = ExtResource("1_wxkt8")
 shape = SubResource("CircleShape2D_x0ags")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 6)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_n162d")
+position = Vector2(0, 8)
+scale = Vector2(0.145, 0.145)
+texture = ExtResource("2_idxtl")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
