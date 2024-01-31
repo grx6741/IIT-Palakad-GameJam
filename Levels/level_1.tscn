@@ -1,24 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://dkcu7hqemxaw1"]
+[gd_scene load_steps=6 format=3 uid="uid://dkcu7hqemxaw1"]
 
-[ext_resource type="Texture2D" uid="uid://84bp11v86kmo" path="res://Assets/Basic_Block.png" id="1_ego6m"]
 [ext_resource type="PackedScene" uid="uid://cynjrc0o440co" path="res://Scenes/player_interface.tscn" id="2_irvk5"]
 [ext_resource type="PackedScene" uid="uid://b5fghoyfd4ec7" path="res://Scenes/bg.tscn" id="3_h3rfk"]
 [ext_resource type="PackedScene" uid="uid://bc0dk71af04ig" path="res://Scenes/win_heart.tscn" id="4_7mvwx"]
 [ext_resource type="PackedScene" uid="uid://d16fevi1yesar" path="res://Scenes/heart.tscn" id="5_l4e05"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b5xiv"]
-texture = ExtResource("1_ego6m")
-texture_region_size = Vector2i(100, 100)
-0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-50, -50, 50, -50, 50, 50, -50, 50)
-
 [sub_resource type="TileSet" id="TileSet_apu4s"]
 tile_size = Vector2i(100, 100)
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 7
-sources/1 = SubResource("TileSetAtlasSource_b5xiv")
 
 [node name="Level_1" type="Node2D"]
 process_mode = 1
