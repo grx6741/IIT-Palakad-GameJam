@@ -22,6 +22,7 @@ var _RotatoryRbs_Type1 : Array
 var _RotatoryRbs_Type2 : Array
 var _RotatoryRbs_Type3 : Array
 var insideUI : bool = false
+var insideTile : bool = false
 
 @export var normalColor = Color.WHITE
 @export var rotatoryColor = Color.YELLOW
@@ -35,6 +36,10 @@ var _limitVal : int
 var _mouse_axis_point_map : Dictionary = {}
 var _joinable_rigidbodies: Array = []
 var joints = []
+
+
+signal _signal_draw_audio()
+signal _signal_not_draw_audio()
 
 func _on_panel_mouse_entered():
 	insideUI = true
@@ -61,7 +66,7 @@ func _on_button_2_mouse_exited():
 	insideUI = false
 
 func _on_tile_map_on_tile_mouse_hover(is_on_tile):
-	insideUI = is_on_tile
+	insideTile = is_on_tile
 
 # Helper Functions
 
@@ -144,6 +149,7 @@ func _on_button_pressed() -> void:
 
 func _on_button_2_pressed():
 	$"../Heart".freeze = not $"../Heart".freeze
+	_unFreezeButtonNode.text = "Freeze" if not $"../Heart".freeze else "Transform"
 	for rb in _rigidBodies:
 		rb.freeze = not rb.freeze
 
@@ -170,9 +176,10 @@ func _ready() -> void:
 
 func ink_drain(drain):
 	inkBar.value -= drain
+	_signal_draw_audio.emit()
 
 func drawLines(event:InputEvent,rotatory:bool = false):
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and inkBar.value > 0 and not insideUI:
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and inkBar.value > 0 and not insideUI and not insideTile:
 		ink_drain(drain_val)
 		if not event is InputEventKey:
 			# push mouse positions to array
@@ -182,6 +189,7 @@ func drawLines(event:InputEvent,rotatory:bool = false):
 				if _lines[-1] != get_global_mouse_position():
 					_lines.append(get_global_mouse_position())
 	else:
+		_signal_not_draw_audio.emit()
 		# push a null when not pressing mouse
 		if not _lines.is_empty() and _lines[-1] != null:
 			_lines.append(null)
@@ -234,6 +242,9 @@ func _input(event: InputEvent) -> void:
 
 
 func create_Joints(rb1, rb2, _angular_vel:float = 0.0 ):
+	if not is_instance_valid(rb1[1]) or not is_instance_valid(rb2[1]):
+		return
+
 	var joint:PinJoint2D = PinJoint2D.new()
 	rb1[1].add_child(joint)
 	joint.position = (rb1[0])
@@ -407,12 +418,15 @@ func _physics_process(_delta):
 			rb.angular_velocity = 3*PI
 
 func _process(_delta: float) -> void:
+
+	print(insideUI)
 	queue_redraw()
 
 func _on_win_heart_level_comp():
 	popup.visible = true
 
 func _on_pause_btn_mouse_entered():
+	print("Hello")
 	insideUI = true
 
 func _on_pause_btn_mouse_exited():

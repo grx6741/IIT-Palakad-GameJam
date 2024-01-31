@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://d16fevi1yesar"]
+[gd_scene load_steps=5 format=3 uid="uid://d16fevi1yesar"]
 
 [ext_resource type="Texture2D" uid="uid://bxl6cxllm2emr" path="res://Assets/HollowHeart-dr2.png" id="1_kow8l"]
+[ext_resource type="AudioStream" uid="uid://dvkrd5bbndwj" path="res://Audio/sinnesloschen-beam-117362.mp3" id="2_aig03"]
+[ext_resource type="Script" path="res://Scripts/DrawSound.gd" id="3_ir1lj"]
+[ext_resource type="AudioStream" uid="uid://corth621o2cef" path="res://Audio/draw.wav" id="4_cnosd"]
 
 [node name="Heart" type="RigidBody2D"]
 collision_layer = 8
@@ -17,3 +20,17 @@ texture = ExtResource("1_kow8l")
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="BGM" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="BGM"]
+stream = ExtResource("2_aig03")
+autoplay = true
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("3_ir1lj")
+
+[node name="DrawingAudioManager" type="AudioStreamPlayer2D" parent="Node2D"]
+stream = ExtResource("4_cnosd")
+volume_db = 7.5
+attenuation = 0.000241042
