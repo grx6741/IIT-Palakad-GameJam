@@ -1,0 +1,130 @@
+[gd_scene load_steps=6 format=3 uid="uid://cynjrc0o440co"]
+
+[ext_resource type="Script" path="res://Scripts/mouse_draw.gd" id="1_as20b"]
+[ext_resource type="Texture2D" uid="uid://ddxyjm825md3t" path="res://Assets/Pen-dr2.png" id="3_ka01o"]
+[ext_resource type="Texture2D" uid="uid://b1iym8c4lfn04" path="res://Assets/PenFill-dr2.png" id="4_jo5pj"]
+[ext_resource type="PackedScene" uid="uid://ddgwyc140y1r" path="res://Scenes/lvl_comp_popup.tscn" id="5_plha6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pljce"]
+bg_color = Color(0, 0, 0, 0.196078)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+corner_detail = 9
+
+[node name="PlayerInterface" type="Node2D"]
+script = ExtResource("1_as20b")
+rotatory3Color = Color(1, 0, 0, 1)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="DrawMenu" type="Panel" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -445.0
+offset_bottom = 282.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pljce")
+
+[node name="StrokeOptions" type="OptionButton" parent="UI/DrawMenu"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -429.0
+offset_top = 24.0
+offset_right = -16.0
+offset_bottom = 93.0
+grow_horizontal = 0
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 32
+alignment = 1
+item_count = 6
+selected = 0
+popup/item_0/text = "Static Stroke"
+popup/item_0/id = 0
+popup/item_1/text = "Remove Stroke"
+popup/item_1/id = 1
+popup/item_2/text = "Joint Node"
+popup/item_2/id = 2
+popup/item_3/text = "Rotatory Stroke @ PI"
+popup/item_3/id = 3
+popup/item_4/text = "Rotatory Stroke @ 2PI"
+popup/item_4/id = 4
+popup/item_5/text = "Rotatory Stroke @ 3PI"
+popup/item_5/id = 5
+
+[node name="Button" type="Button" parent="UI/DrawMenu"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -429.0
+offset_top = 192.0
+offset_right = -17.0
+offset_bottom = 258.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 32
+action_mode = 0
+text = "Clear
+"
+
+[node name="Button2" type="Button" parent="UI/DrawMenu"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -429.0
+offset_top = 109.0
+offset_right = -17.0
+offset_bottom = 175.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Transform"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -221.0
+offset_right = 431.0
+offset_bottom = 1517.0
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+max_value = 1000.0
+value = 1000.0
+fill_mode = 3
+texture_under = ExtResource("3_ka01o")
+texture_progress = ExtResource("4_jo5pj")
+texture_progress_offset = Vector2(170, 200)
+
+[node name="Lvl_Comp_Popup" parent="UI" instance=ExtResource("5_plha6")]
+visible = false
+
+[node name="Level_Num" type="RichTextLabel" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -108.5
+offset_top = 72.0
+offset_right = 76.5
+offset_bottom = 146.0
+grow_horizontal = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_font_sizes/normal_font_size = 50
+
+[connection signal="mouse_entered" from="UI/DrawMenu" to="." method="_on_panel_mouse_entered"]
+[connection signal="mouse_exited" from="UI/DrawMenu" to="." method="_on_panel_mouse_exited"]
+[connection signal="pressed" from="UI/DrawMenu/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="UI/DrawMenu/Button2" to="." method="_on_button_2_pressed"]
