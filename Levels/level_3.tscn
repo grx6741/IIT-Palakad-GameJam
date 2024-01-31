@@ -41,4 +41,5 @@ position = Vector2(438, 432)
 
 [node name="PlayerInterface" parent="." instance=ExtResource("2_p050l")]
 
+[connection signal="on_tile_mouse_hover" from="TileMap" to="PlayerInterface" method="_on_tile_map_on_tile_mouse_hover"]
 [connection signal="levelComp" from="WinHeart" to="PlayerInterface" method="_on_win_heart_level_comp"]

@@ -34,9 +34,12 @@ layer_0/tile_data = PackedInt32Array(65533, 0, 0, 131069, 0, 0, 196605, 0, 0, 26
 script = ExtResource("3_rjxgc")
 
 [node name="WinHeart" parent="." instance=ExtResource("4_7mvwx")]
-position = Vector2(3436, 427)
+position = Vector2(3437, 427)
 
 [node name="Heart" parent="." instance=ExtResource("5_l4e05")]
 position = Vector2(559, 428)
 
 [node name="PlayerInterface" parent="." instance=ExtResource("2_irvk5")]
+
+[connection signal="on_tile_mouse_hover" from="TileMap" to="PlayerInterface" method="_on_tile_map_on_tile_mouse_hover"]
+[connection signal="levelComp" from="WinHeart" to="PlayerInterface" method="_on_win_heart_level_comp"]
