@@ -21,19 +21,19 @@ var _unFreezeButtonNode : Button
 var _RotatoryRbs_Type1 : Array
 var _RotatoryRbs_Type2 : Array
 var _RotatoryRbs_Type3 : Array
-var insideUI = false
+var insideUI : bool = false
 
 @export var normalColor = Color.WHITE
 @export var rotatoryColor = Color.YELLOW
 @export var rotatory2Color = Color.ORANGE
 @export var rotatory3Color = Color.SADDLE_BROWN
-@export var drain_val = 1
+@export var drain_val : int = 1
 
 var strokeColor: Color = normalColor
 var _limitVal : int 
 
 var _mouse_axis_point_map : Dictionary = {}
-var _joinable_rigidbodies:Array = []
+var _joinable_rigidbodies: Array = []
 var joints = []
 
 func _on_panel_mouse_entered():
@@ -41,6 +41,27 @@ func _on_panel_mouse_entered():
 
 func _on_panel_mouse_exited():
 	insideUI = false
+
+func _on_stroke_options_mouse_entered():
+	insideUI = true
+
+func _on_stroke_options_mouse_exited():
+	insideUI = false
+
+func _on_button_mouse_entered():
+	insideUI = true
+
+func _on_button_mouse_exited():
+	insideUI = false
+
+func _on_button_2_mouse_entered():
+	insideUI = true
+
+func _on_button_2_mouse_exited():
+	insideUI = false
+
+func _on_tile_map_on_tile_mouse_hover(is_on_tile):
+	insideUI = is_on_tile
 
 # Helper Functions
 
@@ -127,10 +148,15 @@ func _on_button_2_pressed():
 		rb.freeze = not rb.freeze
 
 func _ready() -> void:
+	
 	var current_scene_file = get_tree().current_scene.scene_file_path
-	var level_number = current_scene_file.to_int()
-	var labelText = "LEVEL " + str(level_number)
-	$UI/Level_Num.text = labelText
+	if (current_scene_file != "res://Scenes/Tutorial.tscn"):
+		var level_number = current_scene_file.to_int()
+		var labelText = "LEVEL " + str(level_number)
+		$UI/Level_Num.text = labelText
+	else:
+		var labelText = "TUTORIAL"
+		$UI/Level_Num.text = labelText
 		
 	@warning_ignore("narrowing_conversion")
 	_limitVal = inkBar.max_value
@@ -385,3 +411,18 @@ func _process(_delta: float) -> void:
 
 func _on_win_heart_level_comp():
 	popup.visible = true
+
+func _on_pause_btn_mouse_entered():
+	insideUI = true
+
+func _on_pause_btn_mouse_exited():
+	insideUI = false
+
+func _on_retry_btn_mouse_entered():
+	insideUI = true
+
+func _on_retry_btn_mouse_exited():
+	insideUI = false
+	
+func _on_retry_btn_pressed():
+	get_tree().reload_current_scene()
