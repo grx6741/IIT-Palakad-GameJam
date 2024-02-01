@@ -22,7 +22,7 @@ physics_layer_0/collision_mask = 7
 sources/0 = SubResource("TileSetAtlasSource_0pfmk")
 
 [node name="Level_1" type="Node2D"]
-process_mode = 1
+process_mode = 3
 
 [node name="BG" parent="." instance=ExtResource("3_h3rfk")]
 script = null
@@ -38,8 +38,11 @@ position = Vector2(3437, 427)
 
 [node name="Heart" parent="." instance=ExtResource("5_l4e05")]
 position = Vector2(559, 428)
+input_pickable = true
 
 [node name="PlayerInterface" parent="." instance=ExtResource("2_irvk5")]
 
 [connection signal="on_tile_mouse_hover" from="TileMap" to="PlayerInterface" method="_on_tile_map_on_tile_mouse_hover"]
 [connection signal="levelComp" from="WinHeart" to="PlayerInterface" method="_on_win_heart_level_comp"]
+[connection signal="mouse_entered" from="Heart" to="PlayerInterface" method="_on_heart_mouse_entered"]
+[connection signal="mouse_exited" from="Heart" to="PlayerInterface" method="_on_heart_mouse_exited"]

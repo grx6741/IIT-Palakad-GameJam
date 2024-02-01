@@ -38,8 +38,11 @@ position = Vector2(1062, -2871)
 
 [node name="Heart" parent="." instance=ExtResource("4_aafjg")]
 position = Vector2(557, 312)
+input_pickable = true
 
 [node name="PlayerInterface" parent="." instance=ExtResource("2_j0wvg")]
 
 [connection signal="on_tile_mouse_hover" from="TileMap" to="PlayerInterface" method="_on_tile_map_on_tile_mouse_hover"]
 [connection signal="levelComp" from="WinHeart" to="PlayerInterface" method="_on_win_heart_level_comp"]
+[connection signal="mouse_entered" from="Heart" to="PlayerInterface" method="_on_heart_mouse_entered"]
+[connection signal="mouse_exited" from="Heart" to="PlayerInterface" method="_on_heart_mouse_exited"]

@@ -99,32 +99,12 @@ func get_2_closest_rb(pos: Vector2, rbs: Array) -> Array:
 		var p: Vector2 = rbs[i][0]
 		var dist: float = p.distance_squared_to(pos)
 		if dist < _second_closest_distance and rbs[i][1] != rbs[_closest][1]:
-			# print(rbs[i][1]," : ",rbs[_closest][1])
 			_second_closest = i
 			_second_closest_distance = dist
 
-
-	# print(_closest," : ",_second_closest)
-	if(_closest == -1 or _second_closest == -1):
+	if (_closest == -1 or _second_closest == -1):
 		return []
 	return [rbs[_closest], rbs[_second_closest]]
-	# return [_closest, _second_closest]
-	# 	var children = rbs[i].get_children()
-	# 	for j in range(len(children)):
-	# 		if children[j] is CollisionShape2D:
-	# 			var p: Vector2 = children[j].get_global_position()
-	# 			var dist: float = p.distance_squared_to(pos)
-	# 			if dist < _second_closest_distance:
-	# 				if dist < _closest_distance:
-	# 					_second_closest = _closest
-	# 					_second_closest_distance = _closest_distance
-
-	# 					_closest = i
-	# 					_closest_distance = dist
-	# 				elif i != _closest:
-	# 					_second_closest = i
-	# 					_second_closest_distance = dist
-	# return [_closest, _second_closest]
 
 # Button Handles
 
@@ -235,10 +215,6 @@ func _input(event: InputEvent) -> void:
 			strokeColor = rotatory3Color
 			drawLines(event,true)
 
-
-# func eraseStrokes() -> void: 
-
-
 func create_Joints(rb1, rb2, _angular_vel:float = 0.0 ):
 	if not is_instance_valid(rb1[1]) or not is_instance_valid(rb2[1]):
 		return
@@ -252,7 +228,6 @@ func create_Joints(rb1, rb2, _angular_vel:float = 0.0 ):
 	joint.motor_target_velocity = _angular_vel
 	joint.disable_collision = true 
 	joints.append(joint)
-	
 
 func constructRigidBodies() -> void:
 	var i: int = 0
@@ -375,11 +350,9 @@ func _draw() -> void:
 					if (in_between_x(prev_pos, curr_pos, mouse_pos)):
 						var _pos = Vector2(mouse_pos.x, 0.5 * (prev_pos.y + curr_pos.y))
 						suitable_points_array.append([_pos,rb])
-						#draw_circle(_pos, 10, Color.RED)
 					if (in_between_y(prev_pos, curr_pos, mouse_pos)):
 						var _pos = Vector2(0.5 * (prev_pos.x + curr_pos.x), mouse_pos.y)
 						suitable_points_array.append([_pos,rb])
-						#draw_circle(_pos, 10, Color.RED)
 
 		if not joints.is_empty():
 			for joint in joints:
@@ -394,12 +367,6 @@ func _draw() -> void:
 		draw_circle(closest[0],10,Color.RED)
 		draw_circle(second_closest[0],10,Color.RED)
 		_joinable_rigidbodies = [closest,second_closest]
-		# for i in range(len(_rigidBodies)):
-		# 	var line: Line2D = _get_line2D(_rigidBodies[i])
-		# 	if i == closest or i == second_closest:
-		# 		line.width = 10
-		# 	else:
-		# 		line.width = 3
 	else:
 		_erasable_body = -1
 		
@@ -435,3 +402,14 @@ func _on_retry_btn_mouse_exited():
 	
 func _on_retry_btn_pressed():
 	get_tree().reload_current_scene()
+	
+signal pausedBtn()
+
+func _on_pause_btn_pressed():
+	pausedBtn.emit()
+
+func _on_heart_mouse_entered():
+	insideUI = true
+
+func _on_heart_mouse_exited():
+	insideUI = false
