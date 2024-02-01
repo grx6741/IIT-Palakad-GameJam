@@ -9,20 +9,20 @@ enum StrokeMode {
 	ROTATION_STROKE_3PI
 }
 
-var _textbox:RichTextLabel
+var _textbox: RichTextLabel
 var _optionNode: OptionButton
 
-var _instruction_array:Array
-var _gen_instruction:String
+var _instruction_array: Array
+var _gen_instruction: String
 
 func setInstructions():
-	print(_instruction_array.resize(6))
+	_instruction_array.resize(6)
 	
 	_gen_instruction = '''
 	-> Left Click to Draw on canvas
-	-> Press Clear to if you want to redraw and regain ink
+	-> Click Clear to remove temp drawing and regain ink
 	-> Hit Space Bar to confirm drawing and instill life
-	-> Click Transform to let the show begin
+	-> Click Transform to let the show begin!
 	'''
 	_instruction_array[StrokeMode.NORMAL_STROKE]='''
 	Stroke Mode -> NORMAL_STROKE
@@ -60,7 +60,6 @@ func _ready():
 	_textbox = $RichTextLabel
 	_optionNode = get_node("../PlayerInterface/UI/DrawMenu/StrokeOptions")
 	setInstructions()
-	print(_optionNode)
 
 func _process(_delta):
 	_textbox.text = _gen_instruction +_instruction_array[_optionNode.get_selected_id()]

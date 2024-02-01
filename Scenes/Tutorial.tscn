@@ -38,25 +38,24 @@ position = Vector2(937, 552)
 
 [node name="PlayerInterface" parent="." instance=ExtResource("1_fis8m")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Tutorial_Info" type="CanvasLayer" parent="."]
 script = ExtResource("2_ehwq3")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Tutorial_Info"]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -760.0
+offset_left = -794.0
 offset_top = -459.0
-offset_right = -26.0
+offset_right = -60.0
 offset_bottom = -92.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/normal_font_size = 26
-text = "Click and Drag to draw"
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="TextureRect" type="TextureRect" parent="Tutorial_Info"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -68,7 +67,7 @@ grow_horizontal = 0
 texture = ExtResource("3_j4f6m")
 expand_mode = 1
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="Tutorial_Info"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
