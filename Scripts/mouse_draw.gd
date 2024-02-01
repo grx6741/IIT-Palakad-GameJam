@@ -37,7 +37,6 @@ var _mouse_axis_point_map : Dictionary = {}
 var _joinable_rigidbodies: Array = []
 var joints = []
 
-
 signal _signal_draw_audio()
 signal _signal_not_draw_audio()
 
@@ -154,7 +153,6 @@ func _on_button_2_pressed():
 		rb.freeze = not rb.freeze
 
 func _ready() -> void:
-	
 	var current_scene_file = get_tree().current_scene.scene_file_path
 	if (current_scene_file != "res://Scenes/Tutorial.tscn"):
 		var level_number = current_scene_file.to_int()
@@ -250,7 +248,7 @@ func create_Joints(rb1, rb2, _angular_vel:float = 0.0 ):
 	joint.position = (rb1[0])
 	joint.node_a = rb1[1].get_path()
 	joint.node_b = rb2[1].get_path()
-	joint.motor_enabled =true
+	joint.motor_enabled = true
 	joint.motor_target_velocity = _angular_vel
 	joint.disable_collision = true 
 	joints.append(joint)
@@ -418,15 +416,12 @@ func _physics_process(_delta):
 			rb.angular_velocity = 3*PI
 
 func _process(_delta: float) -> void:
-
-	print(insideUI)
 	queue_redraw()
 
 func _on_win_heart_level_comp():
 	popup.visible = true
 
 func _on_pause_btn_mouse_entered():
-	print("Hello")
 	insideUI = true
 
 func _on_pause_btn_mouse_exited():

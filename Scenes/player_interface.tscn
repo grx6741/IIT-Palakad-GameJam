@@ -210,16 +210,16 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_y228y")
 action_mode = 0
 icon = ExtResource("6_m7dqb")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Audio" type="Node2D" parent="."]
 script = ExtResource("7_p4mjg")
 
-[node name="DrawingAudioManager" type="AudioStreamPlayer2D" parent="Node2D"]
+[node name="DrawingAudioManager" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("8_plquy")
 volume_db = 7.5
 attenuation = 0.000241042
 
-[connection signal="_signal_draw_audio" from="." to="Node2D" method="_on_player_interface__signal_draw_audio"]
-[connection signal="_signal_not_draw_audio" from="." to="Node2D" method="_on_player_interface__signal_not_draw_audio"]
+[connection signal="_signal_draw_audio" from="." to="Audio" method="_on_player_interface__signal_draw_audio"]
+[connection signal="_signal_not_draw_audio" from="." to="Audio" method="_on_player_interface__signal_not_draw_audio"]
 [connection signal="mouse_entered" from="UI/DrawMenu" to="." method="_on_panel_mouse_entered"]
 [connection signal="mouse_exited" from="UI/DrawMenu" to="." method="_on_panel_mouse_exited"]
 [connection signal="mouse_entered" from="UI/DrawMenu/StrokeOptions" to="." method="_on_stroke_options_mouse_entered"]

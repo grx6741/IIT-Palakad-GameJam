@@ -1,7 +1,7 @@
 extends Node2D
 
-var _audio_player: AudioStreamPlayer2D
-var heart: Node2D
+@onready var _audio_player: AudioStreamPlayer2D = $DrawingAudioManager
+@onready var heart: Node2D = $".."
 
 
 func _on_player_interface__signal_draw_audio():
@@ -14,16 +14,6 @@ func _on_player_interface__signal_draw_audio():
 func _on_player_interface__signal_not_draw_audio():
 	_audio_player.stop()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	_audio_player = $DrawingAudioManager
-	heart = get_node("../../Heart")
-	print(heart)
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	position = heart.global_position
-
-
-
