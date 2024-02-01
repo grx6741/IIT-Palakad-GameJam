@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ddxyjm825md3t" path="res://Assets/Pen-dr2.png" id="3_ka01o"]
 [ext_resource type="Texture2D" uid="uid://b1iym8c4lfn04" path="res://Assets/PenFill-dr2.png" id="4_jo5pj"]
 [ext_resource type="Texture2D" uid="uid://d2q0uolj0q6br" path="res://Assets/Pause-dr1.png" id="5_fv28p"]
-[ext_resource type="PackedScene" uid="uid://ddgwyc140y1r" path="res://Scenes/lvl_comp_popup.tscn" id="5_plha6"]
+[ext_resource type="PackedScene" uid="uid://ddgwyc140y1r" path="res://UI/lvl_comp_popup.tscn" id="5_plha6"]
 [ext_resource type="Texture2D" uid="uid://dbynb67j17w1u" path="res://Assets/Retry-dr1.png" id="6_m7dqb"]
 [ext_resource type="Script" path="res://Scripts/DrawSound.gd" id="7_p4mjg"]
 [ext_resource type="AudioStream" uid="uid://corth621o2cef" path="res://Audio/draw.wav" id="8_plquy"]
@@ -194,7 +194,6 @@ scale = Vector2(0.14, 0.14)
 theme_override_styles/normal = SubResource("StyleBoxFlat_pd8rq")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f5g2y")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_y228y")
-action_mode = 0
 icon = ExtResource("5_fv28p")
 icon_alignment = 1
 
@@ -207,7 +206,6 @@ scale = Vector2(0.14, 0.14)
 theme_override_styles/normal = SubResource("StyleBoxFlat_fcufg")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f5g2y")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_y228y")
-action_mode = 0
 icon = ExtResource("6_m7dqb")
 
 [node name="Audio" type="Node2D" parent="."]
