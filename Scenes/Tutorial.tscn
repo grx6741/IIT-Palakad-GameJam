@@ -35,6 +35,7 @@ script = ExtResource("3_nd30t")
 
 [node name="Heart" parent="." instance=ExtResource("3_4yhjt")]
 position = Vector2(937, 552)
+input_pickable = true
 
 [node name="PlayerInterface" parent="." instance=ExtResource("1_fis8m")]
 
@@ -78,3 +79,7 @@ offset_bottom = 209.0
 grow_horizontal = 0
 theme_override_font_sizes/normal_font_size = 26
 text = "Click to Change Stroke Type"
+
+[connection signal="on_tile_mouse_hover" from="TileMap" to="PlayerInterface" method="_on_tile_map_on_tile_mouse_hover"]
+[connection signal="mouse_entered" from="Heart" to="PlayerInterface" method="_on_heart_mouse_entered"]
+[connection signal="mouse_exited" from="Heart" to="PlayerInterface" method="_on_heart_mouse_exited"]

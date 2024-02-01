@@ -19,37 +19,25 @@ shadow_size = 7
 shadow_offset = Vector2(15, 10)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f86yi"]
-bg_color = Color(0.0392157, 0.0392157, 0.0392157, 0.392157)
+bg_color = Color(0.396078, 0.14902, 0.776471, 1)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
-corner_radius_top_left = 80
-corner_radius_top_right = 80
-corner_radius_bottom_right = 80
-corner_radius_bottom_left = 80
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3sdeb"]
-bg_color = Color(0.333333, 0.333333, 0.333333, 0.784314)
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-corner_radius_top_left = 80
-corner_radius_top_right = 80
-corner_radius_bottom_right = 80
-corner_radius_bottom_left = 80
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x5kmj"]
+bg_color = Color(0.529412, 0.321569, 0.952941, 0.862745)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4itpi"]
-bg_color = Color(0, 0, 0, 0.470588)
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-corner_radius_top_left = 80
-corner_radius_top_right = 80
-corner_radius_bottom_right = 80
-corner_radius_bottom_left = 80
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e30n7"]
+bg_color = Color(0.247059, 0.0705882, 0.505882, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
 
 [node name="Lvl_Comp_Popup" type="Panel"]
 anchors_preset = 8
@@ -74,9 +62,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -65.0
-offset_top = 59.5
+offset_top = 27.5
 offset_right = 195.0
-offset_bottom = 319.5
+offset_bottom = 287.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
@@ -85,8 +73,8 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_focus_color = Color(0, 0, 0, 0)
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_f86yi")
-theme_override_styles/hover = SubResource("StyleBoxFlat_3sdeb")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_4itpi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_x5kmj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_e30n7")
 icon = ExtResource("2_mytte")
 icon_alignment = 1
 

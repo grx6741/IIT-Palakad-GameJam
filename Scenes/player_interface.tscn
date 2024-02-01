@@ -169,6 +169,7 @@ texture_progress = ExtResource("4_jo5pj")
 texture_progress_offset = Vector2(170, 200)
 
 [node name="Lvl_Comp_Popup" parent="UI" instance=ExtResource("5_plha6")]
+process_mode = 3
 visible = false
 
 [node name="Level_Num" type="RichTextLabel" parent="UI"]
@@ -230,6 +231,7 @@ attenuation = 0.000241042
 [connection signal="pressed" from="UI/DrawMenu/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="mouse_entered" from="UI/PauseBtn" to="." method="_on_pause_btn_mouse_entered"]
 [connection signal="mouse_exited" from="UI/PauseBtn" to="." method="_on_pause_btn_mouse_exited"]
+[connection signal="pressed" from="UI/PauseBtn" to="." method="_on_pause_btn_pressed"]
 [connection signal="mouse_entered" from="UI/RetryBtn" to="." method="_on_retry_btn_mouse_entered"]
 [connection signal="mouse_exited" from="UI/RetryBtn" to="." method="_on_retry_btn_mouse_exited"]
 [connection signal="pressed" from="UI/RetryBtn" to="." method="_on_retry_btn_pressed"]
