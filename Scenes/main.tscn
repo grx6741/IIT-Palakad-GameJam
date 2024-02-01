@@ -42,7 +42,7 @@ anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 101.0
 offset_top = 282.0
-offset_right = 285.0
+offset_right = 410.0
 offset_bottom = 383.0
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -56,15 +56,32 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_ok5f4")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_f5f77")
 text = "PLAY"
 icon = ExtResource("3_4mb2i")
-alignment = 0
+icon_alignment = 2
+expand_icon = true
+
+[node name="Tutorial" type="Button" parent="."]
+offset_left = 101.0
+offset_top = 416.0
+offset_right = 410.0
+offset_bottom = 517.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0.482353, 0.482353, 0.482353, 1)
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_t4pvq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ok5f4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_f5f77")
+text = "TUTORIAL"
 icon_alignment = 2
 expand_icon = true
 
 [node name="Exit" type="Button" parent="."]
 offset_left = 101.0
-offset_top = 416.0
-offset_right = 285.0
-offset_bottom = 517.0
+offset_top = 552.0
+offset_right = 411.0
+offset_bottom = 653.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -76,7 +93,6 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_ok5f4")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_f5f77")
 text = "EXIT"
 icon = ExtResource("4_jdrcf")
-alignment = 0
 icon_alignment = 2
 expand_icon = true
 
@@ -115,7 +131,7 @@ theme_override_font_sizes/normal_font_size = 50
 text = "MADE BY:
 Anush Bundel
 Ankur Majumdar
-Bharatkrishnan
+Bharathkrishnan
 Gowrish"
 drag_and_drop_selection_enabled = false
 
@@ -127,4 +143,5 @@ volume_db = 4.0
 autoplay = true
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Tutorial" to="." method="_on_tutorial_pressed"]
 [connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]

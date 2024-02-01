@@ -15,12 +15,21 @@ run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/mode=3
+
 [file_customization]
 
 folder_colors={
-"res://Scenes/": "pink",
-"res://Scripts/": "green",
-"res://Shaders/": "teal"
+"res://Assets/": "purple",
+"res://Audio/": "blue",
+"res://Levels/": "teal",
+"res://Scenes/": "green",
+"res://Scripts/": "yellow",
+"res://Shaders/": "orange",
+"res://UI/": "red",
+"res://addons/": "gray"
 }
 
 [filesystem]
