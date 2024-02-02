@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://fxkxl027h2cw"]
+[gd_scene load_steps=9 format=3 uid="uid://fxkxl027h2cw"]
 
 [ext_resource type="PackedScene" uid="uid://b5fghoyfd4ec7" path="res://Scenes/bg.tscn" id="1_jutfm"]
+[ext_resource type="Script" path="res://Scripts/end.gd" id="1_mbobt"]
 [ext_resource type="Texture2D" uid="uid://yyutcpnbi8ng" path="res://Assets/Home_Button.png" id="1_tdyo2"]
 [ext_resource type="AudioStream" uid="uid://dv5er6twjbpmv" path="res://Audio/main_menu.wav" id="2_jikym"]
-[ext_resource type="AudioStream" uid="uid://bo3k4rhwil3yv" path="res://Audio/LeevelTransitionDraft1.mp3" id="3_ry4mw"]
+[ext_resource type="AudioStream" uid="uid://cddhb54w7xkby" path="res://Audio/pen-click-99025.mp3" id="4_v6ya5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ymyt3"]
 bg_color = Color(0, 0, 0, 0.392157)
@@ -39,6 +40,7 @@ corner_radius_bottom_right = 120
 corner_radius_bottom_left = 120
 
 [node name="End" type="Node2D"]
+script = ExtResource("1_mbobt")
 
 [node name="BG" parent="." instance=ExtResource("1_jutfm")]
 
@@ -75,8 +77,8 @@ stream = ExtResource("2_jikym")
 volume_db = 4.0
 autoplay = true
 
-[node name="PageChange" type="AudioStreamPlayer2D" parent="AudioManager"]
-stream = ExtResource("3_ry4mw")
+[node name="ClickAudio" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("4_v6ya5")
 
 [node name="HomeBtn" type="Button" parent="."]
 offset_left = 16.0
@@ -89,3 +91,5 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_2c8k7")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_5hvpk")
 icon = ExtResource("1_tdyo2")
 icon_alignment = 1
+
+[connection signal="pressed" from="HomeBtn" to="." method="_on_home_btn_pressed"]

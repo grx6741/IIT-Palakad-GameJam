@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/mouse_draw.gd" id="1_as20b"]
 [ext_resource type="Texture2D" uid="uid://ddxyjm825md3t" path="res://Assets/Pen-dr2.png" id="3_ka01o"]
 [ext_resource type="Texture2D" uid="uid://b1iym8c4lfn04" path="res://Assets/PenFill-dr2.png" id="4_jo5pj"]
-[ext_resource type="Texture2D" uid="uid://d2q0uolj0q6br" path="res://Assets/Pause-dr1.png" id="5_fv28p"]
+[ext_resource type="Texture2D" uid="uid://yyutcpnbi8ng" path="res://Assets/Home_Button.png" id="5_418du"]
 [ext_resource type="PackedScene" uid="uid://di0qkftqlht48" path="res://UI/lvl_comp_popup.tscn" id="5_plha6"]
 [ext_resource type="Texture2D" uid="uid://dbynb67j17w1u" path="res://Assets/Retry-dr1.png" id="6_m7dqb"]
 [ext_resource type="Script" path="res://Scripts/DrawSound.gd" id="7_p4mjg"]
@@ -187,7 +187,7 @@ theme_override_constants/shadow_offset_x = 5
 theme_override_constants/shadow_offset_y = 5
 theme_override_font_sizes/normal_font_size = 50
 
-[node name="PauseBtn" type="Button" parent="UI"]
+[node name="HomeBtn" type="Button" parent="UI"]
 offset_left = 16.0
 offset_top = 13.0
 offset_right = 936.0
@@ -196,7 +196,7 @@ scale = Vector2(0.14, 0.14)
 theme_override_styles/normal = SubResource("StyleBoxFlat_pd8rq")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f5g2y")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_y228y")
-icon = ExtResource("5_fv28p")
+icon = ExtResource("5_418du")
 icon_alignment = 1
 
 [node name="RetryBtn" type="Button" parent="UI"]
@@ -234,9 +234,9 @@ stream = ExtResource("9_rscl2")
 [connection signal="mouse_entered" from="UI/DrawMenu/Button2" to="." method="_on_button_2_mouse_entered"]
 [connection signal="mouse_exited" from="UI/DrawMenu/Button2" to="." method="_on_button_2_mouse_exited"]
 [connection signal="pressed" from="UI/DrawMenu/Button2" to="." method="_on_button_2_pressed"]
-[connection signal="mouse_entered" from="UI/PauseBtn" to="." method="_on_pause_btn_mouse_entered"]
-[connection signal="mouse_exited" from="UI/PauseBtn" to="." method="_on_pause_btn_mouse_exited"]
-[connection signal="pressed" from="UI/PauseBtn" to="." method="_on_pause_btn_pressed"]
+[connection signal="mouse_entered" from="UI/HomeBtn" to="." method="_on_pause_btn_mouse_entered"]
+[connection signal="mouse_exited" from="UI/HomeBtn" to="." method="_on_pause_btn_mouse_exited"]
+[connection signal="pressed" from="UI/HomeBtn" to="." method="_on_pause_btn_pressed"]
 [connection signal="mouse_entered" from="UI/RetryBtn" to="." method="_on_retry_btn_mouse_entered"]
 [connection signal="mouse_exited" from="UI/RetryBtn" to="." method="_on_retry_btn_mouse_exited"]
 [connection signal="pressed" from="UI/RetryBtn" to="." method="_on_retry_btn_pressed"]
