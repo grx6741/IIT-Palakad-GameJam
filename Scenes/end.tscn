@@ -1,0 +1,91 @@
+[gd_scene load_steps=8 format=3 uid="uid://bs41127lcsqu4"]
+
+[ext_resource type="PackedScene" uid="uid://b5fghoyfd4ec7" path="res://Scenes/bg.tscn" id="1_jutfm"]
+[ext_resource type="Texture2D" uid="uid://yyutcpnbi8ng" path="res://Assets/Home_Button.png" id="1_tdyo2"]
+[ext_resource type="AudioStream" uid="uid://dv5er6twjbpmv" path="res://Audio/main_menu.wav" id="2_jikym"]
+[ext_resource type="AudioStream" uid="uid://bo3k4rhwil3yv" path="res://Audio/LeevelTransitionDraft1.mp3" id="3_ry4mw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ymyt3"]
+bg_color = Color(0, 0, 0, 0.392157)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 120
+corner_radius_top_right = 120
+corner_radius_bottom_right = 120
+corner_radius_bottom_left = 120
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2c8k7"]
+bg_color = Color(0.333333, 0.333333, 0.333333, 0.784314)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 120
+corner_radius_top_right = 120
+corner_radius_bottom_right = 120
+corner_radius_bottom_left = 120
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5hvpk"]
+bg_color = Color(0, 0, 0, 0.470588)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 120
+corner_radius_top_right = 120
+corner_radius_bottom_right = 120
+corner_radius_bottom_left = 120
+
+[node name="End" type="Node2D"]
+
+[node name="BG" parent="." instance=ExtResource("1_jutfm")]
+
+[node name="Credits" type="RichTextLabel" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1349.0
+offset_top = 548.0
+offset_right = 1859.0
+offset_bottom = 899.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_outline_size = 1
+theme_override_font_sizes/normal_font_size = 50
+text = "MADE BY:
+Anush Bundel
+Ankur Majumdar
+S. Bharath Krishnan
+Gowrish I."
+drag_and_drop_selection_enabled = false
+
+[node name="AudioManager" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("2_jikym")
+volume_db = 4.0
+autoplay = true
+
+[node name="PageChange" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("3_ry4mw")
+
+[node name="HomeBtn" type="Button" parent="."]
+offset_left = 16.0
+offset_top = 13.0
+offset_right = 936.0
+offset_bottom = 933.0
+scale = Vector2(0.14, 0.14)
+theme_override_styles/normal = SubResource("StyleBoxFlat_ymyt3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2c8k7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5hvpk")
+icon = ExtResource("1_tdyo2")
+icon_alignment = 1
