@@ -30,7 +30,7 @@ func _on_next_pressed():
 		# if click_sound.finished:
 		# 	loadLevel()
 
-func _process(delta):
+func _process(_delta):
 	if(visible == true and not hasPlayed):
 		$Audio/WinSound.play()
 		hasPlayed = true

@@ -152,7 +152,7 @@ autoplay = true
 [node name="PageChange" type="AudioStreamPlayer2D" parent="AudioManager"]
 stream = ExtResource("6_vmysc")
 
-[node name="Title2" type="Sprite2D" parent="."]
+[node name="Subtitle" type="Sprite2D" parent="."]
 position = Vector2(677, 145)
 texture = ExtResource("8_28pxk")
 
