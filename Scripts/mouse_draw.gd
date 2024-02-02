@@ -23,6 +23,7 @@ var _RotatoryRbs_Type2 : Array
 var _RotatoryRbs_Type3 : Array
 var insideUI : bool = false
 var insideTile : bool = false
+var clickSound:AudioStreamPlayer2D
 
 @export var normalColor = Color.WHITE
 @export var rotatoryColor = Color.YELLOW
@@ -113,6 +114,7 @@ func clear_temp_lines() -> void:
 	inkBar.value = _limitVal
 
 func _on_button_pressed() -> void:
+	playClickSound()
 	if len(_lines) > 1:
 		clear_temp_lines()
 	else:
@@ -127,6 +129,7 @@ func _on_button_pressed() -> void:
 		inkBar.value = _limitVal
 
 func _on_button_2_pressed():
+	playClickSound()
 	$"../Heart".freeze = not $"../Heart".freeze
 	_unFreezeButtonNode.text = "Freeze" if not $"../Heart".freeze else "Transform"
 	for rb in _rigidBodies:
@@ -147,10 +150,17 @@ func _ready() -> void:
 	_optionNode = get_node("UI/DrawMenu/StrokeOptions")
 	_clearButtonNode = get_node("UI/DrawMenu/Button")
 	_unFreezeButtonNode = get_node("UI/DrawMenu/Button2")
+	clickSound = $Audio/ButtonClickAudio
 
 	_optionNode.focus_mode = BaseButton.FOCUS_NONE
 	_clearButtonNode.focus_mode = BaseButton.FOCUS_NONE
 	_unFreezeButtonNode.focus_mode = BaseButton.FOCUS_NONE
+
+func playClickSound():
+	if(not clickSound.playing):
+		clickSound.play()
+		await get_tree().create_timer(.2).timeout
+		clickSound.stop();
 
 func ink_drain(drain):
 	inkBar.value -= drain
@@ -385,8 +395,10 @@ func _physics_process(_delta):
 func _process(_delta: float) -> void:
 	queue_redraw()
 
-func _on_win_heart_level_comp():
+func _on_win_heart_level_comp(pos):
+	popup.get_child(-1).position = pos
 	popup.visible = true
+	
 
 func _on_pause_btn_mouse_entered():
 	insideUI = true
@@ -400,12 +412,16 @@ func _on_retry_btn_mouse_entered():
 func _on_retry_btn_mouse_exited():
 	insideUI = false
 	
+
 func _on_retry_btn_pressed():
+	playClickSound()
+	await get_tree().create_timer(.2).timeout
 	get_tree().reload_current_scene()
 	
 signal pausedBtn()
 
 func _on_pause_btn_pressed():
+	playClickSound()
 	pausedBtn.emit()
 
 func _on_heart_mouse_entered():
@@ -413,3 +429,7 @@ func _on_heart_mouse_entered():
 
 func _on_heart_mouse_exited():
 	insideUI = false
+
+
+func _on_stroke_options_pressed():
+	playClickSound()

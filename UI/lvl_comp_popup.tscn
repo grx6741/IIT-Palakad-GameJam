@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://ddgwyc140y1r"]
+[gd_scene load_steps=9 format=3 uid="uid://di0qkftqlht48"]
 
 [ext_resource type="Script" path="res://Scripts/lvl_comp_popup.gd" id="1_veofr"]
 [ext_resource type="Texture2D" uid="uid://dbq7eq5pqfskf" path="res://Assets/Check-dr1.png" id="2_mytte"]
+[ext_resource type="AudioStream" uid="uid://bo3k4rhwil3yv" path="res://Audio/LeevelTransitionDraft1.mp3" id="3_3muot"]
+[ext_resource type="AudioStream" uid="uid://b7ndrk2hfyon3" path="res://Audio/success-fanfare-trumpets-6185.mp3" id="4_wf3a1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fdj2o"]
 bg_color = Color(0.211765, 0.211765, 0.211765, 1)
@@ -96,4 +98,15 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 55
 text = "LEVEL COMPLETE!"
 
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="ClickSound" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("3_3muot")
+attenuation = 0.000106267
+
+[node name="WinSound" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("4_wf3a1")
+attenuation = 0.00285954
+
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
+[connection signal="finished" from="Audio/ClickSound" to="." method="_on_click_sound_finished"]
