@@ -422,8 +422,7 @@ signal pausedBtn()
 
 func _on_pause_btn_pressed():
 	playClickSound()
-	await get_tree().create_timer(.2).timeout
-	get_tree().change_scene_to_file("res://Scenes/main.tscn")
+	pausedBtn.emit()
 
 func _on_heart_mouse_entered():
 	insideUI = true

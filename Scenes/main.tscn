@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://5vydd7k6g57u"]
+[gd_scene load_steps=10 format=3 uid="uid://5vydd7k6g57u"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_6ef4s"]
 [ext_resource type="PackedScene" uid="uid://b5fghoyfd4ec7" path="res://Scenes/bg.tscn" id="2_ssm2j"]
 [ext_resource type="Texture2D" uid="uid://blntilmwv8ap2" path="res://Assets/Play_Btn.png" id="3_4mb2i"]
 [ext_resource type="Texture2D" uid="uid://bm41x4h3jc8sr" path="res://Assets/Quit_Btn.png" id="4_jdrcf"]
 [ext_resource type="AudioStream" uid="uid://dv5er6twjbpmv" path="res://Audio/main_menu.wav" id="5_2ux16"]
+[ext_resource type="AudioStream" uid="uid://bo3k4rhwil3yv" path="res://Audio/LeevelTransitionDraft1.mp3" id="6_vmysc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4pvq"]
 bg_color = Color(1, 1, 1, 1)
@@ -141,6 +142,9 @@ drag_and_drop_selection_enabled = false
 stream = ExtResource("5_2ux16")
 volume_db = 4.0
 autoplay = true
+
+[node name="PageChange" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("6_vmysc")
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Tutorial" to="." method="_on_tutorial_pressed"]

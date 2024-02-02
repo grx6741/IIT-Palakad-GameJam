@@ -78,7 +78,30 @@ offset_right = -419.0
 offset_bottom = 209.0
 grow_horizontal = 0
 theme_override_font_sizes/normal_font_size = 26
-text = "Click to Change Stroke Type"
+text = "Click to Change the Stroke Mode"
+
+[node name="Panel" type="Panel" parent="Tutorial_Info"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 205.0
+offset_top = -884.0
+offset_right = 776.0
+offset_bottom = -156.0
+grow_vertical = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Tutorial_Info/Panel"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 37.0
+offset_top = -358.0
+offset_right = 549.0
+offset_bottom = 356.0
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 20
+tab_size = 0
 
 [connection signal="on_tile_mouse_hover" from="TileMap" to="PlayerInterface" method="_on_tile_map_on_tile_mouse_hover"]
 [connection signal="mouse_entered" from="Heart" to="PlayerInterface" method="_on_heart_mouse_entered"]
