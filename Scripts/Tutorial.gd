@@ -27,13 +27,14 @@ func setInstructions():
 		'Put Joints with Care.',
 		'Unnecessary Strokes and Joints can cause the Heart to Escape the Matrix.',
 		'Your Creativity is the Limit.',
-		'Restart the Level if you Encounter any \"Dead Ends\".'
+		'Restart the Level if you Encounter any \"Dead Ends\".',
+		'Use FREEZE as a Potential PAUSE Button if Required.'
 	]
 	
 	_gen_instruction = '''
 	OBJECTIVE:
 	> The Game consists of Five Levels.
-	> Every Level has an Incomplete Heart which needs another Heart for Love to Prosper.
+	> Every Level has an Incomplete Heart which needs another Heart for Love to Prosper...
 	> Draw a Temporary Body for the Heart to Navigate Obstacles and Reach the other Heart.
 	
 	INSTRUCTIONS:
@@ -83,7 +84,7 @@ func _ready():
 	_textbox = $Panel/RichTextLabel
 	_optionNode = get_node("../PlayerInterface/UI/DrawMenu/StrokeOptions")
 	setInstructions()
-	var tipRand = randi_range(0, 6)
+	var tipRand = randi_range(0, 7)
 	cur_rand_tip = _tip_instruction[tipRand]
 
 var time = 0 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://fxkxl027h2cw"]
+[gd_scene load_steps=10 format=3 uid="uid://fxkxl027h2cw"]
 
 [ext_resource type="PackedScene" uid="uid://b5fghoyfd4ec7" path="res://Scenes/bg.tscn" id="1_jutfm"]
 [ext_resource type="Script" path="res://Scripts/end.gd" id="1_mbobt"]
 [ext_resource type="Texture2D" uid="uid://yyutcpnbi8ng" path="res://Assets/Home_Button.png" id="1_tdyo2"]
 [ext_resource type="AudioStream" uid="uid://dv5er6twjbpmv" path="res://Audio/main_menu.wav" id="2_jikym"]
 [ext_resource type="AudioStream" uid="uid://cddhb54w7xkby" path="res://Audio/pen-click-99025.mp3" id="4_v6ya5"]
+[ext_resource type="Texture2D" uid="uid://07q41oa35gn6" path="res://Assets/Thanks.png" id="6_fmcy2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ymyt3"]
 bg_color = Color(0, 0, 0, 0.392157)
@@ -44,32 +45,6 @@ script = ExtResource("1_mbobt")
 
 [node name="BG" parent="." instance=ExtResource("1_jutfm")]
 
-[node name="Credits" type="RichTextLabel" parent="."]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1349.0
-offset_top = 548.0
-offset_right = 1859.0
-offset_bottom = 899.0
-grow_horizontal = 0
-grow_vertical = 0
-size_flags_horizontal = 8
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 5
-theme_override_constants/shadow_offset_y = 5
-theme_override_constants/shadow_outline_size = 1
-theme_override_font_sizes/normal_font_size = 50
-text = "MADE BY:
-Anush Bundel
-Ankur Majumdar
-S. Bharath Krishnan
-Gowrish I."
-drag_and_drop_selection_enabled = false
-
 [node name="AudioManager" type="Node2D" parent="."]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="AudioManager"]
@@ -91,5 +66,46 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_2c8k7")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_5hvpk")
 icon = ExtResource("1_tdyo2")
 icon_alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Credits" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -471.0
+offset_top = -346.0
+offset_right = -59.0
+offset_bottom = -43.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/shadow_outline_size = 1
+theme_override_font_sizes/normal_font_size = 40
+text = "MADE BY:
+Anush Bundel
+Ankur Majumdar
+S. Bharath Krishnan
+Gowrish I."
+drag_and_drop_selection_enabled = false
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -604.5
+offset_top = -135.0
+offset_right = 604.5
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_fmcy2")
 
 [connection signal="pressed" from="HomeBtn" to="." method="_on_home_btn_pressed"]
