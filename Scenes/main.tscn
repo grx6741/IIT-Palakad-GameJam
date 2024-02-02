@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://5vydd7k6g57u"]
+[gd_scene load_steps=12 format=3 uid="uid://5vydd7k6g57u"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_6ef4s"]
 [ext_resource type="PackedScene" uid="uid://b5fghoyfd4ec7" path="res://Scenes/bg.tscn" id="2_ssm2j"]
 [ext_resource type="Texture2D" uid="uid://blntilmwv8ap2" path="res://Assets/Play_Btn.png" id="3_4mb2i"]
+[ext_resource type="Texture2D" uid="uid://ce88llnheswkx" path="res://Assets/Tutorial_Btn.png" id="4_hlerd"]
 [ext_resource type="Texture2D" uid="uid://bm41x4h3jc8sr" path="res://Assets/Quit_Btn.png" id="4_jdrcf"]
 [ext_resource type="AudioStream" uid="uid://dv5er6twjbpmv" path="res://Audio/main_menu.wav" id="5_2ux16"]
+[ext_resource type="AudioStream" uid="uid://bo3k4rhwil3yv" path="res://Audio/LeevelTransitionDraft1.mp3" id="6_vmysc"]
+[ext_resource type="Texture2D" uid="uid://djrk6sqfx7cxu" path="res://Assets/Title.png" id="8_28pxk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4pvq"]
 bg_color = Color(1, 1, 1, 1)
@@ -40,30 +43,31 @@ script = ExtResource("1_6ef4s")
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 101.0
-offset_top = 282.0
-offset_right = 410.0
-offset_bottom = 383.0
+offset_left = 190.0
+offset_top = 355.0
+offset_right = 499.0
+offset_bottom = 456.0
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_pressed_color = Color(0.482353, 0.482353, 0.482353, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 45
 theme_override_styles/normal = SubResource("StyleBoxFlat_t4pvq")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ok5f4")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_f5f77")
-text = "PLAY"
+text = "  PLAY"
 icon = ExtResource("3_4mb2i")
+alignment = 0
 icon_alignment = 2
 expand_icon = true
 
 [node name="Tutorial" type="Button" parent="."]
-offset_left = 101.0
-offset_top = 416.0
-offset_right = 410.0
-offset_bottom = 517.0
+offset_left = 190.0
+offset_top = 495.0
+offset_right = 499.0
+offset_bottom = 596.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -73,41 +77,44 @@ theme_override_font_sizes/font_size = 38
 theme_override_styles/normal = SubResource("StyleBoxFlat_t4pvq")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ok5f4")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_f5f77")
-text = "TUTORIAL"
+text = "  TUTORIAL"
+icon = ExtResource("4_hlerd")
+alignment = 0
 icon_alignment = 2
 expand_icon = true
 
 [node name="Exit" type="Button" parent="."]
-offset_left = 101.0
-offset_top = 552.0
-offset_right = 411.0
-offset_bottom = 653.0
+offset_left = 190.0
+offset_top = 635.0
+offset_right = 500.0
+offset_bottom = 736.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/icon_pressed_color = Color(0.482353, 0.482353, 0.482353, 1)
-theme_override_font_sizes/font_size = 42
+theme_override_font_sizes/font_size = 45
 theme_override_styles/normal = SubResource("StyleBoxFlat_t4pvq")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ok5f4")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_f5f77")
-text = "EXIT"
+text = "  EXIT"
 icon = ExtResource("4_jdrcf")
+alignment = 0
 icon_alignment = 2
 expand_icon = true
 
 [node name="Title" type="RichTextLabel" parent="."]
-offset_left = 97.0
-offset_top = 95.0
-offset_right = 1212.0
-offset_bottom = 215.0
+offset_left = 127.0
+offset_top = 236.0
+offset_right = 1234.0
+offset_bottom = 327.0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 5
-theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
 theme_override_constants/shadow_outline_size = 1
-theme_override_font_sizes/normal_font_size = 80
-text = "PLACEHOLDER TITLE TEXT"
+theme_override_font_sizes/normal_font_size = 40
+text = "Love Rotates and Heart Beats . . . But, Are You Sure?"
 drag_and_drop_selection_enabled = false
 
 [node name="Credits" type="RichTextLabel" parent="."]
@@ -116,23 +123,23 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1382.0
-offset_top = 545.0
-offset_right = 1816.0
-offset_bottom = 896.0
+offset_left = 1434.0
+offset_top = 651.0
+offset_right = 1846.0
+offset_bottom = 954.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 5
-theme_override_constants/shadow_offset_y = 5
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
 theme_override_constants/shadow_outline_size = 1
-theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/normal_font_size = 40
 text = "MADE BY:
 Anush Bundel
 Ankur Majumdar
-Bharathkrishnan
-Gowrish"
+S. Bharath Krishnan
+Gowrish I."
 drag_and_drop_selection_enabled = false
 
 [node name="AudioManager" type="Node2D" parent="."]
@@ -141,6 +148,13 @@ drag_and_drop_selection_enabled = false
 stream = ExtResource("5_2ux16")
 volume_db = 4.0
 autoplay = true
+
+[node name="PageChange" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("6_vmysc")
+
+[node name="Title2" type="Sprite2D" parent="."]
+position = Vector2(677, 145)
+texture = ExtResource("8_28pxk")
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Tutorial" to="." method="_on_tutorial_pressed"]
