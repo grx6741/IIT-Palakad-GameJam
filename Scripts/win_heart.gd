@@ -1,7 +1,7 @@
 extends Area2D
 
-signal levelComp()
+signal levelComp(pos)
 
 func _on_body_entered(body):
 	if body.name == "Heart":
-		levelComp.emit()
+		levelComp.emit(body.position)
