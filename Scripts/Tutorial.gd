@@ -89,7 +89,7 @@ func _ready():
 
 var time = 0 
 func generateRandTip():
-	var tipRand = randi_range(0, 6)
+	var tipRand = randi_range(0, 7)
 	if time > 10:
 		cur_rand_tip = _tip_instruction[tipRand]
 		time = 0
