@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0e4utwcbmc7k"]
+[gd_scene load_steps=6 format=3 uid="uid://df3c2l6raww54"]
 
 [ext_resource type="Script" path="res://Scripts/mouse_draw.gd" id="1_vsm6m"]
 [ext_resource type="Shader" path="res://Shaders/Post_Processing.gdshader" id="3_ps0qp"]

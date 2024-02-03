@@ -9,10 +9,8 @@ func _on_player_interface__signal_draw_audio():
 	if not _audio_player.playing:
 		_audio_player.play()
 
-
 func _on_player_interface__signal_not_draw_audio():
 	_audio_player.stop()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	position = heart.global_position

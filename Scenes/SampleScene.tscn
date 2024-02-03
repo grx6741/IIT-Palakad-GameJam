@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2f5lq2iathxx"]
+[gd_scene load_steps=5 format=3 uid="uid://ceasnwcfp3hxw"]
 
 [ext_resource type="Script" path="res://Scripts/create_colliders.gd" id="1_n0q5i"]
 [ext_resource type="Texture2D" uid="uid://dsdro15jy2ixb" path="res://icon.svg" id="2_3ayai"]

@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://corth621o2cef" path="res://Audio/draw.wav" id="4_cnosd"]
 
 [node name="Heart" type="RigidBody2D"]
-collision_layer = 8
+collision_layer = 9
 collision_priority = 2.0
 freeze = true
 
