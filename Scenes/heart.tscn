@@ -8,10 +8,7 @@
 [node name="Heart" type="RigidBody2D"]
 collision_layer = 9
 collision_priority = 2.0
-mass = 100.0
 freeze = true
-continuous_cd = 2
-contact_monitor = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 scale = Vector2(2, 2)
