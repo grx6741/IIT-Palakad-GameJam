@@ -36,7 +36,7 @@ var _limitVal : int
 
 var _mouse_axis_point_map : Dictionary = {}
 var _joinable_rigidbodies: Array = []
-var joints = []
+var joints:Dictionary = {}
 
 signal _signal_draw_audio()
 signal _signal_not_draw_audio()
@@ -133,7 +133,10 @@ func _on_button_2_pressed():
 	$"../Heart".freeze = not $"../Heart".freeze
 	_unFreezeButtonNode.text = "Freeze" if not $"../Heart".freeze else "Transform"
 	for rb in _rigidBodies:
-		rb.freeze = not rb.freeze
+		if _unFreezeButtonNode.text == "Freeze":
+			rb.freeze = false
+		elif _unFreezeButtonNode.text == "Transform":
+			rb.freeze = true
 
 func _ready() -> void:
 	var current_scene_file = get_tree().current_scene.scene_file_path
@@ -202,19 +205,36 @@ func _input(event: InputEvent) -> void:
 			if event is InputEventKey:
 				if event.keycode == KEY_SPACE:
 					if (len(_joinable_rigidbodies) >= 2):
-						create_Joints(_joinable_rigidbodies[0], _joinable_rigidbodies[1], 10)
+						create_Joints(_joinable_rigidbodies[0], _joinable_rigidbodies[1])
 		StrokeMode.NORMAL_STROKE:
 			strokeColor = normalColor
 			drawLines(event)
 		StrokeMode.ERASER_STROKE:
 			if event is InputEventKey:
 				if event.keycode == KEY_SPACE and _erasable_body != -1:
-					joints.clear()
-					_joinable_rigidbodies.clear()
+					if joints.get(_rigidBodies[_erasable_body]) != null:
+						joints[_rigidBodies[_erasable_body]].clear()
+						_joinable_rigidbodies.clear()
+						
+
+					for jointList in joints.values():
+						var indicesToPop = [] 
+						for ind in range(len(jointList)):
+							if jointList[ind].node_a == _rigidBodies[_erasable_body].get_path() or jointList[ind].node_b == _rigidBodies[_erasable_body].get_path():
+								jointList[ind].free()
+								indicesToPop.push_back(ind)
+						for ind in range(len(jointList)-1 , -1,-1):
+							if not is_instance_valid(jointList[ind]):
+								jointList.pop_at(ind)
+						
+					# print(joints)
+					
+
 					remove_child(_rigidBodies[_erasable_body])
 					_rigidBodies[_erasable_body].free()
 					_rigidBodies.pop_at(_erasable_body)
 					_erasable_body = -1
+					
 		StrokeMode.ROTATION_STROKE_PI :
 			strokeColor = rotatoryColor
 			drawLines(event,true)
@@ -231,13 +251,16 @@ func create_Joints(rb1, rb2, _angular_vel:float = 0.0 ):
 
 	var joint:PinJoint2D = PinJoint2D.new()
 	rb1[1].add_child(joint)
-	joint.position = (rb1[0])
+	joint.global_position = (rb1[0])
 	joint.node_a = rb1[1].get_path()
 	joint.node_b = rb2[1].get_path()
 	joint.motor_enabled = true
-	joint.motor_target_velocity = _angular_vel
+	# joint.motor_target_velocity = _angular_vel
 	joint.disable_collision = true 
-	joints.append(joint)
+	if joints.get(rb1[1]) == null:
+		joints[rb1[1]] = []
+
+	joints[rb1[1]].append(joint)
 
 func constructRigidBodies() -> void:
 	var i: int = 0
@@ -259,7 +282,6 @@ func constructRigidBodies() -> void:
 		handleColliderCreation(rigidBody, line2d.points)
 		rigidBody.add_child(line2d)
 		rigidBody.mass = len(line2d.points)
-		rigidBody.freeze = true
 		rigidBody.collision_mask = 2 | 1
 
 		# rigidBody.kine
@@ -267,6 +289,10 @@ func constructRigidBodies() -> void:
 		_rigidBodies.append(rigidBody)
 		i = j + 1
 		j = get_null(_lines, i)
+		if _unFreezeButtonNode.text == "Freeze":
+			rigidBody.freeze = false
+		if _unFreezeButtonNode.text == "Transform":
+			rigidBody.freeze = true
 
 func constructRigidBodiesRotatory(type:StrokeMode) -> void:
 	var i: int = 0
@@ -288,7 +314,6 @@ func constructRigidBodiesRotatory(type:StrokeMode) -> void:
 		handleColliderCreation(rigidBody, line2d.points)
 		rigidBody.add_child(line2d)
 		rigidBody.mass = len(line2d.points)
-		rigidBody.freeze = true
 		rigidBody.add_collision_exception_with($"../Heart")
 		# rigidBody.kine
 		add_child(rigidBody)
@@ -302,6 +327,10 @@ func constructRigidBodiesRotatory(type:StrokeMode) -> void:
 				_RotatoryRbs_Type3.append(rigidBody)
 		i = j + 1
 		j = get_null(_lines, i)
+		if _unFreezeButtonNode.text == "Freeze":
+			rigidBody.freeze = false
+		if _unFreezeButtonNode.text == "Transform":
+			rigidBody.freeze = true
 
 func in_between_x(a: Vector2, b:Vector2, c: Vector2) -> bool:
 	return ( a.x <= c.x and c.x <= b.x ) or ( b.x <= c.x and c.x <= a.x )
@@ -365,8 +394,9 @@ func _draw() -> void:
 						suitable_points_array.append([_pos,rb])
 
 		if not joints.is_empty():
-			for joint in joints:
-				draw_circle(joint.global_position,10,Color.GREEN)
+			for jointList in joints.values():
+				for joint in jointList:
+					draw_circle(joint.global_position,10,Color.GREEN)
 
 		var rbIndices= get_2_closest_rb(mouse_pos, suitable_points_array)
 		if(len(rbIndices) == 0):

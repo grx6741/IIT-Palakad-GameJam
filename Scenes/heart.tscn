@@ -1,18 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://d16fevi1yesar"]
+[gd_scene load_steps=6 format=3 uid="uid://d16fevi1yesar"]
 
 [ext_resource type="Texture2D" uid="uid://bxl6cxllm2emr" path="res://Assets/HollowHeart-dr2.png" id="1_kow8l"]
 [ext_resource type="AudioStream" uid="uid://dvkrd5bbndwj" path="res://Audio/sinnesloschen-beam-117362.mp3" id="2_aig03"]
 [ext_resource type="Script" path="res://Scripts/DrawSound.gd" id="3_ir1lj"]
 [ext_resource type="AudioStream" uid="uid://corth621o2cef" path="res://Audio/draw.wav" id="4_cnosd"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71kou"]
+size = Vector2(101, 86)
+
 [node name="Heart" type="RigidBody2D"]
-collision_layer = 8
+collision_layer = 9
 collision_priority = 2.0
+mass = 100.0
 freeze = true
+continuous_cd = 2
+contact_monitor = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 scale = Vector2(2, 2)
+build_mode = 1
 polygon = PackedVector2Array(0, -15.3333, 3.33333, -18.6667, 6.38916, -20.7621, 9.42278, -21.7297, 12.6667, -22, 16.2496, -21.2085, 18.6667, -20, 22, -17.3333, 23.995, -14.015, 24.6667, -12, 25.0507, -8.40565, 24.6667, -5.33333, 24, -3.33333, 23.3333, -2, 22, 0, 0.666667, 22, 0.666667, 22, 0, 22, -0.666667, 22, -22.0425, -0.00618267, -23.5215, -2.19332, -24.3471, -4.1068, -24.9341, -6.47286, -25.0889, -9.06205, -24.7073, -11.7611, -23.8741, -14.1046, -22.7642, -16.1184, -21.1267, -18.042, -18.7891, -19.9388, -16, -21.3333, -14.5511, -21.7165, -12, -22, -10.016, -21.8287, -7.47965, -21.1881, -5.72092, -20.3721, -3.33333, -18.6667)
+disabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_71kou")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.132, 0.132)
