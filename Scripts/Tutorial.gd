@@ -34,7 +34,7 @@ func setInstructions():
 	_gen_instruction = '''
 	OBJECTIVE:
 	> The Game consists of Five Levels.
-	> Every Level has an Incomplete Heart which needs another Heart for Love to Prosper...
+	> Every Level has an Incomplete Heart which needs another Heart for Love to Prosper!
 	> Draw a Temporary Body for the Heart to Navigate Obstacles and Reach the other Heart.
 	
 	INSTRUCTIONS:
