@@ -17,7 +17,8 @@
 #### We hope you have fun playing our game
 
 ## WebBuild : [FunkyBlueprints](https://bharathk33.itch.io/funkyblueprints)
-
+## Demo Video ( Click On Image Below 👇 )
+[![Funky Blueprints Demo](https://img.youtube.com/vi/QuP8OgCKnaM/0.jpg)](https://www.youtube.com/watch?v=QuP8OgCKnaM)
 ## Credits
 #### Main Menu Theme - Life Of a Wandering Wizard [SergeQuadrado](https://pixabay.com/users/sergequadrado-24990007/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=155)
 #### Game BGM - Beam [sinneschlösen](https://pixabay.com/users/sinneschl%C3%B6sen-1888724/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=117362)
